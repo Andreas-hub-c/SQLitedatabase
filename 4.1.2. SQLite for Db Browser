@@ -1,15 +1,26 @@
-CREATE TABLE Dosimeter (
+CREATE TABLE dosiMeter
+(
   SerialNumber INT NOT NULL,
-  type TEXT NOT NULL,
+  type INT NOT NULL,
   PRIMARY KEY (SerialNumber)
 );
 
-CREATE TABLE DosimeterReading (
+CREATE TABLE DosiMeterReading (
   dateReadOut DATE NOT NULL,
-  dosimeterId INT NOT NULL,
+  dateDoseFrom DATE NOT NULL,
+  dateDoseTo DATE NOT NULL,
   dosemsv INT NOT NULL,
-  PRIMARY KEY (dateReadOut, dosimeterId),
-  FOREIGN KEY (dosimeterId) REFERENCES Dosimeter(SerialNumber)
+  PRIMARY KEY (dateReadOut),
+  UNIQUE (dateDoseFrom),
+  UNIQUE (dateDoseTo),
+  UNIQUE (dosemsv)
+);
+
+CREATE TABLE extSoldier (
+  Surname TEXT NOT NULL,
+  IdNumber TEXT NOT NULL, -- Assuming this is a text-based ID
+  firstName TEXT NOT NULL,
+  PRIMARY KEY (IdNumber)
 );
 
 CREATE TABLE Soldier (
@@ -17,21 +28,23 @@ CREATE TABLE Soldier (
   FirstName TEXT NOT NULL,
   surName TEXT NOT NULL,
   dateOfBirth DATE NOT NULL,
-  grou TEXT NOT NULL,
+  grou TEXT NOT NULL,  -- Assuming group is a text value
   nationality TEXT NOT NULL,
   language TEXT NOT NULL,
   street TEXT NOT NULL,
-  nr TEXT NOT NULL,
+  nr TEXT NOT NULL,  -- Assuming house number is a text value (could be INT if it's purely numeric)
   city TEXT NOT NULL,
   postalCode TEXT NOT NULL,
   Country TEXT NOT NULL,
   SerialNumber INT NOT NULL,
   PRIMARY KEY (ArmyNumber),
-  FOREIGN KEY (SerialNumber) REFERENCES Dosimeter(SerialNumber)
+  FOREIGN KEY (SerialNumber) REFERENCES dosiMeter(SerialNumber)
 );
 
-CREATE TABLE Soldier_phones (
-  phones TEXT NOT NULL,
+
+CREATE TABLE Soldier_phones
+(
+  phones INT NOT NULL,
   ArmyNumber INT NOT NULL,
   PRIMARY KEY (phones, ArmyNumber),
   FOREIGN KEY (ArmyNumber) REFERENCES Soldier(ArmyNumber)
