@@ -3,6 +3,13 @@ group project for information management
 
 Hoi iedereen, kdenk da het effectief makkelijker is om te werken met github (is overzichtelijker), zoals je kan zien is dit een README file, hier staat meestal een uitvoerige beschrijving van wat het project juist is. Ook denk ik dat het een enorm pluspunt (voor de cdt.) is als we een link naar deze github repository (plaats waar alles staat) in ons document staat. 
 
+4.2.1. InformationManagement.jl ==> geeft error 
+  normaal gezien om op te starten in browser het volgende ingeven:
+    Main Page: http://localhost:8080/
+    Page 1: http://localhost:8080/page1
+    Page 2: http://localhost:8080/page2
+    Page 3 with Table: http://localhost:8080/page3
+
 Using GitHub for Collaboration:
 
   Create a GitHub Repository:
