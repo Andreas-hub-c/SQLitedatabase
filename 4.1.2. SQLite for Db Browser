@@ -30,6 +30,8 @@ CREATE TABLE Soldier (
   FOREIGN KEY (SerialNumber) REFERENCES Dosimeter(SerialNumber)
 );
 
+#"group" geeft een error, daarom passen we "group" aan naar "grou
+
 CREATE TABLE Soldier_phones (
   phones TEXT NOT NULL,
   ArmyNumber INT NOT NULL,
