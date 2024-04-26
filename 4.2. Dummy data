@@ -1,7 +1,6 @@
-# Assuming ArmyNumber starts at 10001
 INSERT INTO Soldier (ArmyNumber, FirstName, surName, dateOfBirth, grou, nationality, language, street, nr, city, postalCode, Country, SerialNumber)
 VALUES
-  ('10001', 'John', 'Doe', '1980-01-01', 'A', 'US', 'English', '123 Main St', '10', 'Anytown', '12345', 'USA', 'D12345'),
+(10001, 'John', 'Doe', '1980-01-01', 'A', 'US', 'English', '123 Main St', '10', 'Anytown', '12345', 'USA', 'D12345'),
   (10002, 'Jane', 'Smith', '1985-02-02', 'B', 'UK', 'English', '456 Elm St', '20', 'London', 'E1 5BT', 'UK', 'D23456'),
   (10003, 'Peter', 'Jones', '1990-03-03', 'C', 'Canada', 'English', '789 Maple Ave', '30', 'Toronto', 'M5H 2N2', 'Canada', 'D34567'),
   (10004, 'Mary', 'Brown', '1995-04-04', 'D', 'Australia', 'English', '1011 Oak Ln', '40', 'Sydney', '2000', 'Australia', 'D45678'),
@@ -23,11 +22,7 @@ VALUES
   (10020, 'Angela', 'Wright', '2021-08-08', 'V', 'Poland', 'Polish', '4041 Oak Ln', '200', 'Warsaw', '00-681', 'Poland', 'D11011'),
   (10021, 'Kevin', 'Scott', '2022-09-09', 'W', 'Netherlands', 'Dutch', '4243 Birch St', '210', 'Amsterdam', '1017 CN', 'Netherlands', 'D12012')
 
-
-# Dosimeter Readings (Sample Data - Adjust dosemsv values as needed)
 INSERT INTO DosimeterReading (dosimeterId, dateReadOut, dosemsv)
-
-# Dosimeter 1 (ID 1000) - Dosimeter 21 (ID 1021)
 VALUES (1000, '2022-04-01', 0.25),
 (1000, '2022-05-01', 0.18),
 (1000, '2022-06-01', 0.32),
@@ -51,4 +46,3 @@ VALUES (1000, '2022-04-01', 0.25),
 (1018, '2023-12-01', 0.48),
 (1019, '2024-01-01', 0.23),
 (1021, '2024-02-01', 0.12)
-
