@@ -1,54 +1,38 @@
-CREATE TABLE dosiMeter
-(
+CREATE TABLE Dosimeter (
   SerialNumber INT NOT NULL,
-  type INT NOT NULL,
+  type TEXT NOT NULL,
   PRIMARY KEY (SerialNumber)
 );
 
-CREATE TABLE DosiMeterReading
-(
-  dateReadOut INT NOT NULL,
-  dateDoseFrom INT NOT NULL,
-  dateDoseTo INT NOT NULL,
+CREATE TABLE DosimeterReading (
+  dateReadOut DATE NOT NULL,
+  dosimeterId INT NOT NULL,
   dosemsv INT NOT NULL,
-  PRIMARY KEY (dateReadOut),
-  UNIQUE (dateDoseFrom),
-  UNIQUE (dateDoseTo),
-  UNIQUE (dosemsv)
+  PRIMARY KEY (dateReadOut, dosimeterId),
+  FOREIGN KEY (dosimeterId) REFERENCES Dosimeter(SerialNumber)
 );
 
-CREATE TABLE extSoldier
-(
-  Surname INT NOT NULL,
-  IdNumber INT NOT NULL,
-  firstName INT NOT NULL,
-  PRIMARY KEY (IdNumber)
-);
-
-CREATE TABLE Soldier
-(
+CREATE TABLE Soldier (
   ArmyNumber INT NOT NULL,
-  FirstName INT NOT NULL,
-  surName INT NOT NULL,
-  dateOfBirth INT NOT NULL,
-  group INT NOT NULL,
-  nationality INT NOT NULL,
-  language INT NOT NULL,
-  street INT NOT NULL,
-  nr INT NOT NULL,
-  city INT NOT NULL,
-  postalCode INT NOT NULL,
-  Country INT NOT NULL,
+  FirstName TEXT NOT NULL,
+  surName TEXT NOT NULL,
+  dateOfBirth DATE NOT NULL,
+  group TEXT NOT NULL,
+  nationality TEXT NOT NULL,
+  language TEXT NOT NULL,
+  street TEXT NOT NULL,
+  nr TEXT NOT NULL,
+  city TEXT NOT NULL,
+  postalCode TEXT NOT NULL,
+  Country TEXT NOT NULL,
   SerialNumber INT NOT NULL,
   PRIMARY KEY (ArmyNumber),
-  FOREIGN KEY (SerialNumber) REFERENCES dosiMeter(SerialNumber)
+  FOREIGN KEY (SerialNumber) REFERENCES Dosimeter(SerialNumber)
 );
 
-CREATE TABLE Soldier_phones
-(
-  phones INT NOT NULL,
+CREATE TABLE Soldier_phones (
+  phones TEXT NOT NULL,
   ArmyNumber INT NOT NULL,
   PRIMARY KEY (phones, ArmyNumber),
   FOREIGN KEY (ArmyNumber) REFERENCES Soldier(ArmyNumber)
 );
-  
