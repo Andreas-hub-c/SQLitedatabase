@@ -1,7 +1,7 @@
 # Assuming ArmyNumber starts at 10001
-INSERT INTO Soldier (ArmyNumber, FirstName, surName, dateOfBirth, group, nationality, language, street, nr, city, postalCode, Country, SerialNumber)
+INSERT INTO Soldier (ArmyNumber, FirstName, surName, dateOfBirth, grou, nationality, language, street, nr, city, postalCode, Country, SerialNumber)
 VALUES
-  (10001, 'John', 'Doe', '1980-01-01', 'A', 'US', 'English', '123 Main St', '10', 'Anytown', '12345', 'USA', 'D12345'),
+  ('10001', 'John', 'Doe', '1980-01-01', 'A', 'US', 'English', '123 Main St', '10', 'Anytown', '12345', 'USA', 'D12345'),
   (10002, 'Jane', 'Smith', '1985-02-02', 'B', 'UK', 'English', '456 Elm St', '20', 'London', 'E1 5BT', 'UK', 'D23456'),
   (10003, 'Peter', 'Jones', '1990-03-03', 'C', 'Canada', 'English', '789 Maple Ave', '30', 'Toronto', 'M5H 2N2', 'Canada', 'D34567'),
   (10004, 'Mary', 'Brown', '1995-04-04', 'D', 'Australia', 'English', '1011 Oak Ln', '40', 'Sydney', '2000', 'Australia', 'D45678'),
@@ -10,7 +10,7 @@ VALUES
   (10007, 'Michael', 'Taylor', '2015-07-07', 'I', 'France', 'French', '1617 Birch St', '70', 'Paris', '75001', 'France', 'D87654'),
   (10008, 'Elizabeth', 'Davis', '2020-08-08', 'J', 'Spain', 'Spanish', '1819 Elmwood Dr', '80', 'Madrid', '28001', 'Spain', 'D76543'),
   (10009, 'Richard', 'Lee', '2021-09-09', 'K', 'Italy', 'Italian', '2021 Forest Ln', '90', 'Rome', '00163', 'Italy', 'D65432'),
-  (10010, 'Jessica', 'Parker', '2022-10-10', 'L', 'Japan', 'Japanese', '
+  (10009, 'Richard', 'Lee', '2021-09-09', 'K', 'Italy', 'Italian', '2021 Forest Ln', '90', 'Rome', '00163', 'Italy', 'D65432'),
   (10011, 'William', 'Garcia', '2012-11-11', 'M', 'Mexico', 'Spanish', '2223 Oak St', '110', 'Mexico City', '06600', 'Mexico', 'D10123'),
   (10012, 'Jennifer', 'Robinson', '2013-12-12', 'N', 'South Africa', 'English', '2425 Pine Rd', '120', 'Johannesburg', '2001', 'South Africa', 'D20234'),
   (10013, 'Andrew', 'Clark', '2014-01-01', 'O', 'Ireland', 'English', '2627 Maple Ave', '130', 'Dublin', 'D02', 'Ireland', 'D30345'),
@@ -21,7 +21,8 @@ VALUES
   (10018, 'Sandra', 'King', '2019-06-06', 'T', 'Nigeria', 'English', '3637 Maple Ave', '180', 'Lagos', '100001', 'Nigeria', 'D80890'),
   (10019, 'Anthony', 'Allen', '2020-07-07', 'U', 'Sweden', 'Swedish', '3839 Elm St', '190', 'Stockholm', '111 86', 'Sweden', 'D90910'),
   (10020, 'Angela', 'Wright', '2021-08-08', 'V', 'Poland', 'Polish', '4041 Oak Ln', '200', 'Warsaw', '00-681', 'Poland', 'D11011'),
-  (10021, 'Kevin', 'Scott', '2022-09-09', 'W', 'Netherlands', 'Dutch', '4243 Birch St', '210', 'Amsterdam', '1017 CN', 'Netherlands', 'D12012'),
+  (10021, 'Kevin', 'Scott', '2022-09-09', 'W', 'Netherlands', 'Dutch', '4243 Birch St', '210', 'Amsterdam', '1017 CN', 'Netherlands', 'D12012')
+
 
 # Dosimeter Readings (Sample Data - Adjust dosemsv values as needed)
 INSERT INTO DosimeterReading (dosimeterId, dateReadOut, dosemsv)
@@ -49,5 +50,5 @@ VALUES (1000, '2022-04-01', 0.25),
 (1017, '2023-11-01', 0.24),
 (1018, '2023-12-01', 0.48),
 (1019, '2024-01-01', 0.23),
-(1021, '2024-02-01', 0.12),
+(1021, '2024-02-01', 0.12)
 
