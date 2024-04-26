@@ -17,7 +17,7 @@ CREATE TABLE Soldier (
   FirstName TEXT NOT NULL,
   surName TEXT NOT NULL,
   dateOfBirth DATE NOT NULL,
-  group TEXT NOT NULL,
+  grou TEXT NOT NULL,
   nationality TEXT NOT NULL,
   language TEXT NOT NULL,
   street TEXT NOT NULL,
@@ -30,11 +30,14 @@ CREATE TABLE Soldier (
   FOREIGN KEY (SerialNumber) REFERENCES Dosimeter(SerialNumber)
 );
 
-#"group" geeft een error, daarom passen we "group" aan naar "grou
-
 CREATE TABLE Soldier_phones (
   phones TEXT NOT NULL,
   ArmyNumber INT NOT NULL,
   PRIMARY KEY (phones, ArmyNumber),
   FOREIGN KEY (ArmyNumber) REFERENCES Soldier(ArmyNumber)
 );
+
+DROP TABLE Dosimeter;
+DROP TABLE DosimeterReading;
+DROP TABLE Soldier;
+DROP TABLE Soldier_phones;
