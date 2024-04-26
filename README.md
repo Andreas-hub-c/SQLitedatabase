@@ -19,8 +19,9 @@ Using GitHub for Collaboration:
   Clone the Repository: Your friends can then clone the repository onto their machines. This will download the latest version of the database file.
   Making Changes: Everyone can use DB Browser for SQLite to make changes to the database schema locally.
   Committing and Pushing Changes: After making changes, each person commits their changes to their local Git repository and then pushes those changes to the main    repository on GitHub.
-      Important Points:
+  
+  Important Points:
 
-      Conflict Resolution: If multiple people modify the same part of the schema simultaneously, Git might encounter conflicts. These conflicts need to be               resolved manually by merging the changes. There are tools and tutorials available to help with conflict resolution.
-      Alternative Approach:
-      While the above workflow uses the database file directly, an alternative approach is to keep the database schema definition as SQL code within the                 repository. This can be achieved by creating a script file (e.g., schema.sql) containing the CREATE TABLE statements for your database schema. You can then        use Git to track changes to this script file. This approach might be more flexible for complex projects.
+  Conflict Resolution: If multiple people modify the same part of the schema simultaneously, Git might encounter conflicts. These conflicts need to be               resolved manually by merging the changes. There are tools and tutorials available to help with conflict resolution.
+   Alternative Approach:
+  While the above workflow uses the database file directly, an alternative approach is to keep the database schema definition as SQL code within the                 repository. This can be achieved by creating a script file (e.g., schema.sql) containing the CREATE TABLE statements for your database schema. You can then        use Git to track changes to this script file. This approach might be more flexible for complex projects.
