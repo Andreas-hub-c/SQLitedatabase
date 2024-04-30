@@ -1,6 +1,6 @@
 CREATE TABLE dosiMeter
 (
-  SerialNumber INTEGER NOT NULL CHECK (SerialNumber >= 000001 AND SerialNumber <= 9999999),
+  SerialNumber INTEGER NOT NULL CHECK (SerialNumber >= 0001 AND SerialNumber <= 9999),
   type INT NOT NULL,
   PRIMARY KEY (SerialNumber)
 );
@@ -24,11 +24,11 @@ CREATE TABLE extSoldier (
 );
 
 CREATE TABLE Soldier (
-  ArmyNumber INT NOT NULL,
+  ArmyNumber INTEGER NOT NULL CHECK (ArmyNumber >= 0000001 AND SerialNumber <= 9999999),
   FirstName TEXT NOT NULL,
   surName TEXT NOT NULL,
   dateOfBirth DATE NOT NULL,
-  grou TEXT NOT NULL,  -- Assuming group is a text value
+  group TEXT NOT NULL,  -- Assuming group is a text value
   nationality TEXT NOT NULL,
   language TEXT NOT NULL,
   street TEXT NOT NULL,
@@ -36,7 +36,6 @@ CREATE TABLE Soldier (
   city TEXT NOT NULL,
   postalCode TEXT NOT NULL,
   Country TEXT NOT NULL,
-  SerialNumber INT NOT NULL,
   PRIMARY KEY (ArmyNumber),
   FOREIGN KEY (SerialNumber) REFERENCES dosiMeter(SerialNumber)
 );
