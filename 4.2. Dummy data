@@ -1,27 +1,27 @@
 INSERT INTO dosiMeter (SerialNumber, type)
 VALUES
-(1000, 1),  -- Assuming type 1 represents a specific dosimeter model
-(1001, 2),  -- Assuming type 2 represents a different dosimeter model
-(1002, 1),  -- Duplicate type allowed if models can be the same
-(1003, 3),  -- Assuming type 3 represents another dosimeter model
-(1004, 2),  -- Duplicate type allowed
-(1005, 1),  -- Duplicate type allowed
-(1006, 2),  -- Duplicate type allowed
-(1007, 4),  -- Assuming type 4 represents another dosimeter model
-(1008, 3),  -- Duplicate type allowed
-(1009, 1),  -- Duplicate type allowed
-(1010, 2),  -- Duplicate type allowed
-(1011, 1),  -- Duplicate type allowed
-(1012, 3),  -- Assuming type 3 represents another dosimeter model
-(1013, 1),  -- Duplicate type allowed
-(1014, 4),  -- Duplicate type allowed
-(1015, 2),  -- Duplicate type allowed
-(1016, 1),  -- Duplicate type allowed
-(1017, 3),  -- Duplicate type allowed
-(1018, 2),  -- Duplicate type allowed
-(1019, 4),  -- Duplicate type allowed
-(1020, 1),  -- Duplicate type allowed
-(1021, 2)   -- Duplicate type allowed
+(1000, instadose+)
+(1001, instadose+)
+(1002, instadose+)
+(1003, instadose+)
+(1004, instadose+)
+(1005, instadose+)
+(1006, instadose+)
+(1007, instadose+)
+(1008, instadose+)
+(1009, instadose+)
+(1010, instadose+)
+(1011, instadose+)
+(1012, instadose+)
+(1013, instadose+)
+(1014, instadose+)
+(1015, instadose+)
+(1016, instadose+)
+(1017, instadose+)
+(1018, instadose+)
+(1019, instadose+)
+(1020, instadose+)
+(1021, instadose+)  
 
 INSERT INTO DosimeterReading (dateReadOut, dateDoseFrom, dateDoseTo, dosemsv)
 VALUES ('2024-04-15', '2024-04-01', '2024-04-14', 0.35),  -- Reading on 15th, dose from 1st to 14th
@@ -86,28 +86,28 @@ VALUES
 	   
 INSERT INTO Soldier (ArmyNumber, FirstName, surName, dateOfBirth, grou, nationality, language, street, nr, city, postalCode, Country, SerialNumber)
 VALUES
-(10001, 'John', 'Doe', '1980-01-01', 'A', 'US', 'English', '123 Main St', '10', 'Anytown', '12345', 'USA', 1000),  -- Assuming SerialNumber 1000 exists in dosimeter table
-(10002, 'Jane', 'Smith', '1985-02-02', 'B', 'UK', 'English', '456 Elm St', '20', 'London', 'E1 5BT', 'UK', 1001),   -- Assuming SerialNumber 1001 exists in dosimeter table
-(10003, 'Peter', 'Jones', '1990-03-03', 'C', 'Canada', 'English', '789 Maple Ave', '30', 'Toronto', 'M5H 2N2', 'Canada', 1002),  -- Assuming SerialNumber 1002 exists in dosimeter table
-(10004, 'Mary', 'Brown', '1995-04-04', 'D', 'Australia', 'English', '1011 Oak Ln', '40', 'Sydney', '2000', 'Australia', 1003), -- Assuming SerialNumber 1003 exists in dosimeter table
-(10005, 'David', 'Williams', '2000-05-05', 'E', 'New Zealand', 'English', '1213 Pine Rd', '50', 'Auckland', '1010', 'New Zealand', 1004),  -- Assuming SerialNumber 1004 exists in dosimeter table
-(10006, 'Sarah', 'Miller', '2010-06-06', 'H', 'Germany', 'German', '1415 Linden Ave', '60', 'Berlin', '10117', 'Germany', 1005),  -- Assuming SerialNumber 1005 exists in dosimeter table
-(10007, 'Michael', 'Taylor', '2015-07-07', 'I', 'France', 'French', '1617 Birch St', '70', 'Paris', '75001', 'France', 1006),  -- Assuming SerialNumber 1006 exists in dosimeter table
-(10008, 'Elizabeth', 'Davis', '2020-08-08', 'J', 'Spain', 'Spanish', '1819 Elmwood Dr', '80', 'Madrid', '28001', 'Spain', 1007),  -- Assuming SerialNumber 1007 exists in dosimeter table
-(10009, 'Richard', 'Lee', '2021-09-09', 'K', 'Italy', 'Italian', '2021 Forest Ln', '90', 'Rome', '00163', 'Italy', 1008),  -- Assuming SerialNumber 1008 exists in dosimeter table
-(10010, 'Andreas', 'Willekens', '2021-09-09', 'K', 'Belgium', 'Dutch', '2023 Waterkant', '11', 'Brussels', '1000', 'Belgium', 1009),  -- Assuming SerialNumber 1009 exists in dosimeter table
-(10011, 'William', 'Garcia', '2012-11-11', 'M', 'Mexico', 'Spanish', '2223 Oak St', '110', 'Mexico City', '06600', 'Mexico', 1010),  -- Assuming SerialNumber 1010 exists in dosimeter table
-(10012, 'Jennifer', 'Robinson', '2013-12-12', 'N', 'South Africa', 'English', '2425 Pine Rd', '120', 'Johannesburg', '20011', 'South Africa', 1011),
-(10013, 'Daniel', 'Johnson', '1975-01-25', 'A', 'USA', 'English', '2627 Maple Ave', '130', 'New York', '10001', 'USA', 1012),
-(10014, 'Jessica', 'Wilson', '1982-02-14', 'B', 'UK', 'English', '2829 Elm St', '140', 'Manchester', 'M1 5AN', 'UK', 1013),
-(10015, 'Christopher', 'Clark', '1987-03-03', 'C', 'Canada', 'English', '3031 Oak Ln', '150', 'Vancouver', 'V6B 4N5', 'Canada', 1014),
-(10016, 'Margaret', 'Lewis', '1992-04-10', 'D', 'Australia', 'English', '3233 Birch St', '160', 'Melbourne', '3000', 'Australia', 1015),
-(10017, 'Robert', 'Walker', '1997-05-21', 'E', 'New Zealand', 'English', '3435 Pine Rd', '170', 'Wellington', '6011', 'New Zealand', 1016),
-(10018, 'Laura', 'Moore', '2005-06-15', 'H', 'Germany', 'German', '3637 Linden Ave', '180', 'Hamburg', '20095', 'Germany', 1017),
-(10019, 'Joseph', 'King', '2012-07-08', 'I', 'France', 'French', '3839 Birch St', '190', 'Lyon', '69001', 'France', 1018),
-(10020, 'Emily', 'Wright', '2017-08-22', 'J', 'Spain', 'Spanish', '4041 Elmwood Dr', '200', 'Barcelona', '08001', 'Spain', 1019),
-(10021, 'Matthew', 'Allen', '2019-09-16', 'K', 'Italy', 'Italian', '4243 Forest Ln', '210', 'Milan', '20121', 'Italy', 1020),
-(10022, 'Stephanie', 'Scott', '2020-10-05', 'K', 'Belgium', 'Dutch', '4445 Waterkant', '220', 'Antwerp', '2000', 'Belgium', 1021)
+(2171544, 'John', 'Doe', '1980-01-01', 'A', 'US', 'English', '123 Main St', '10', 'Anytown', '12345', 'USA', 1000),  
+(1852276, 'Jane', 'Smith', '1985-02-02', 'B', 'UK', 'English', '456 Elm St', '20', 'London', 'E1 5BT', 'UK', 1001),   
+(1963253, 'Peter', 'Jones', '1990-03-03', 'C', 'Canada', 'English', '789 Maple Ave', '30', 'Toronto', 'M5H 2N2', 'Canada', 1002),  
+(2252278, 'Mary', 'Brown', '1995-04-04', 'D', 'Australia', 'English', '1011 Oak Ln', '40', 'Sydney', '2000', 'Australia', 1003), 
+(2321458, 'David', 'Williams', '2000-05-05', 'E', 'New Zealand', 'English', '1213 Pine Rd', '50', 'Auckland', '1010', 'New Zealand', 1004),  
+(1200569, 'Sarah', 'Miller', '2010-06-06', 'H', 'Germany', 'German', '1415 Linden Ave', '60', 'Berlin', '10117', 'Germany', 1005),  
+(1705236, 'Michael', 'Taylor', '2015-07-07', 'I', 'France', 'French', '1617 Birch St', '70', 'Paris', '75001', 'France', 1006),  
+(1893647, 'Elizabeth', 'Davis', '2020-08-08', 'J', 'Spain', 'Spanish', '1819 Elmwood Dr', '80', 'Madrid', '28001', 'Spain', 1007),  
+(2104597, 'Richard', 'Lee', '2021-09-09', 'K', 'Italy', 'Italian', '2021 Forest Ln', '90', 'Rome', '00163', 'Italy', 1008), 
+(1785239, 'Andreas', 'Willekens', '2021-09-09', 'K', 'Belgium', 'Dutch', '2023 Waterkant', '11', 'Brussels', '1000', 'Belgium', 1009),  
+(1785214, 'William', 'Garcia', '2012-11-11', 'M', 'Mexico', 'Spanish', '2223 Oak St', '110', 'Mexico City', '06600', 'Mexico', 1010),  
+(2045761, 'Jennifer', 'Robinson', '2013-12-12', 'N', 'South Africa', 'English', '2425 Pine Rd', '120', 'Johannesburg', '20011', 'South Africa', 1011),
+(1045830, 'Daniel', 'Johnson', '1975-01-25', 'A', 'USA', 'English', '2627 Maple Ave', '130', 'New York', '10001', 'USA', 1012),
+(1423782, 'Jessica', 'Wilson', '1982-02-14', 'B', 'UK', 'English', '2829 Elm St', '140', 'Manchester', 'M1 5AN', 'UK', 1013),
+(1872697, 'Christopher', 'Clark', '1987-03-03', 'C', 'Canada', 'English', '3031 Oak Ln', '150', 'Vancouver', 'V6B 4N5', 'Canada', 1014),
+(2257896, 'Margaret', 'Lewis', '1992-04-10', 'D', 'Australia', 'English', '3233 Birch St', '160', 'Melbourne', '3000', 'Australia', 1015),
+(2107895, 'Robert', 'Walker', '1997-05-21', 'E', 'New Zealand', 'English', '3435 Pine Rd', '170', 'Wellington', '6011', 'New Zealand', 1016),
+(1921475, 'Laura', 'Moore', '2005-06-15', 'H', 'Germany', 'German', '3637 Linden Ave', '180', 'Hamburg', '20095', 'Germany', 1017),
+(1628716, 'Joseph', 'King', '2012-07-08', 'I', 'France', 'French', '3839 Birch St', '190', 'Lyon', '69001', 'France', 1018),
+(1456723, 'Emily', 'Wright', '2017-08-22', 'J', 'Spain', 'Spanish', '4041 Elmwood Dr', '200', 'Barcelona', '08001', 'Spain', 1019),
+(2214756, 'Matthew', 'Allen', '2019-09-16', 'K', 'Italy', 'Italian', '4243 Forest Ln', '210', 'Milan', '20121', 'Italy', 1020),
+(2148630, 'Stephanie', 'Scott', '2020-10-05', 'K', 'Belgium', 'Dutch', '4445 Waterkant', '220', 'Antwerp', '2000', 'Belgium', 1021)
 
 INSERT INTO Soldier_phones (phones, ArmyNumber)
 VALUES
