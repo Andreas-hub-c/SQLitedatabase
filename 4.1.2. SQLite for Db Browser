@@ -28,7 +28,7 @@ CREATE TABLE Soldier (
   FirstName TEXT NOT NULL,
   surName TEXT NOT NULL,
   dateOfBirth DATE NOT NULL,
-  group TEXT NOT NULL,  -- Assuming group is a text value
+  grou TEXT NOT NULL,  -- Assuming group is a text value
   nationality TEXT NOT NULL,
   language TEXT NOT NULL,
   street TEXT NOT NULL,
