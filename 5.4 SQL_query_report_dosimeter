@@ -1,0 +1,9 @@
+SELECT
+  Soldier.ArmyNumber,
+  Soldier.firstName,
+  Soldier.surname, --These lines select specific columns from the Soldier table. They include the soldier's army number, first name, and surname.
+  dosimeter.serialNumber,
+  dosimeter.type -- These lines select specific columns from the dosimeter table. They include the dosimeter's serial number and type.
+FROM Soldier
+JOIN dosimeterAssignment ON Soldier.ArmyNumber = dosimeterAssignment.ArmyNumber --combines data from the Soldier table with the dosimeterAssignment table based on a matching condition. Here, the condition is that the ArmyNumber in the Soldier table must be equal to the ArmyNumber in the dosimeterAssignment table. This creates a link between soldiers and their dosimeter assignments.
+JOIN dosimeter ON dosimeterAssignment.dosimeterID = dosimeter.dosimeterID; --combines data from the previous join result (including Soldier and dosimeterAssignment tables) with the dosimeter table. The matching condition here is that the dosimeterID in the dosimeterAssignment table must be equal to the dosimeterID in the dosimeter table. This links soldier information with the specific details of their assigned dosimeter.
