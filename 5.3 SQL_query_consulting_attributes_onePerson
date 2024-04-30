@@ -1,0 +1,3 @@
+SELECT firstName, surname, nationality, language
+FROM Soldier
+WHERE ArmyNumber = <army_number>;   -- in <army_number> wordt het desbetreffend afmynumber ingevoegd
