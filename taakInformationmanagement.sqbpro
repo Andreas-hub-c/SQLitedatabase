@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/wellens.a/Desktop/taakInformationmanagement.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="125"/><column_width id="3" width="1903"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,16:mainDosiMeterReading"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="DosiMeterReading" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="122"/><column index="2" value="135"/><column index="3" value="112"/><column index="4" value="86"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE dosiMeter
+(
+  SerialNumber INT NOT NULL,
+  type INT NOT NULL,
+  PRIMARY KEY (SerialNumber)
+);
+
+CREATE TABLE DosiMeterReading
+(
+  dateReadOut INT NOT NULL,
+  dateDoseFrom INT NOT NULL,
+  dateDoseTo INT NOT NULL,
+  dosemsv INT NOT NULL,
+  PRIMARY KEY (dateReadOut),
+  UNIQUE (dateDoseFrom),
+  UNIQUE (dateDoseTo),
+  UNIQUE (dosemsv)
+);
+
+CREATE TABLE extSoldier
+(
+  Surname INT NOT NULL,
+  IdNumber INT NOT NULL,
+  firstName INT NOT NULL,
+  PRIMARY KEY (IdNumber)
+);
+
+CREATE TABLE Soldier
+(
+  ArmyNumber INT NOT NULL,
+  FirstName INT NOT NULL,
+  surName INT NOT NULL,
+  dateOfBirth INT NOT NULL,
+  group INT NOT NULL,
+  nationality INT NOT NULL,
+  language INT NOT NULL,
+  street INT NOT NULL,
+  nr INT NOT NULL,
+  city INT NOT NULL,
+  postalCode INT NOT NULL,
+  Country INT NOT NULL,
+  SerialNumber INT NOT NULL,
+  PRIMARY KEY (ArmyNumber),
+  FOREIGN KEY (SerialNumber) REFERENCES dosiMeter(SerialNumber)
+);
+
+CREATE TABLE Soldier_phones
+(
+  phones INT NOT NULL,
+  ArmyNumber INT NOT NULL,
+  PRIMARY KEY (phones, ArmyNumber),
+  FOREIGN KEY (ArmyNumber) REFERENCES Soldier(ArmyNumber)
+);</sql><current_tab id="0"/></tab_sql></sqlb_project>
