@@ -1,0 +1,5 @@
+SELECT firstName, surname, nationality, phones
+FROM Soldier;
+
+SELECT firstName, surname -- selecteer van alle personen?
+FROM extSoldier;          -- selecteer van alle personen? 
