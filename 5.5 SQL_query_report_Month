@@ -1,0 +1,15 @@
+SELECT
+  Soldier.firstName,
+  Soldier.surname,
+  Soldier.ArmyNumber,
+  dosimeter.serialNumber,
+  doseReadout.dateReadOut,
+  doseReadout.dateDoseFrom,
+  doseReadout.dateDoseTo,
+  doseReadout.doseSv
+FROM Soldier
+JOIN dosimeterAssignment ON Soldier.ArmyNumber = dosimeterAssignment.ArmyNumber
+JOIN dosimeter ON dosimeterAssignment.dosimeterID = dosimeter.dosimeterID
+JOIN doseReadout ON dosimeter.dosimeterID = doseReadout.dosimeterID
+WHERE MONTH(doseReadout.dateReadOut) = <chosen_month>;                 -- geef in <chosen_month> de juiste maand in 
+
