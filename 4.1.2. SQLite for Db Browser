@@ -1,6 +1,6 @@
 CREATE TABLE dosiMeter
 (
-  SerialNumber INT NOT NULL,
+  SerialNumber INTEGER NOT NULL CHECK (SerialNumber >= 000001 AND SerialNumber <= 9999999),
   type INT NOT NULL,
   PRIMARY KEY (SerialNumber)
 );
