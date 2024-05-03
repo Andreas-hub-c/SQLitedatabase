@@ -24,7 +24,7 @@ CREATE TABLE extSoldier (
 );
 
 CREATE TABLE Soldier (
-  ArmyNumber INTEGER NOT NULL CHECK (ArmyNumber >= 0000001 AND SerialNumber <= 9999999),
+  ArmyNumber INTEGER NOT NULL CHECK (ArmyNumber >= 0000001 AND ArmyNumber <= 9999999),
   FirstName TEXT NOT NULL,
   surName TEXT NOT NULL,
   dateOfBirth DATE NOT NULL,
