@@ -24,26 +24,26 @@ VALUES
 (1021, instadose+)  
 
 INSERT INTO DosimeterReading (dateReadOut, dateDoseFrom, dateDoseTo, dosemsv)
-VALUES ('2024-04-15', '2024-04-01', '2024-04-14', 0.35),  -- Reading on 15th, dose from 1st to 14th
-       ('2024-05-10', '2024-04-15', '2024-05-09', 0.22),  -- Reading on 10th, dose from 15th of April to 9th of May
-       ('2024-06-05', '2024-05-10', '2024-06-04', 0.19),  -- Reading on 5th of June, dose from 10th of May to 4th of June
-       ('2024-07-01', '2024-06-05', '2024-06-30', 0.41),  -- Reading on 1st of July, dose from 5th of June to 30th of June
-       ('2024-07-20', '2024-07-01', '2024-07-19', 0.29),  -- Reading on 20th of July, dose from 1st to 19th of July
-       ('2024-08-15', '2024-07-20', '2024-08-14', 0.17),  -- Reading on 15th of August, dose from 20th of July to 14th of August
-       ('2024-09-05', '2024-08-15', '2024-09-04', 0.33),  -- Reading on 5th of September, dose from 15th of August to 4th of September
-       ('2024-09-25', '2024-09-05', '2024-09-24', 0.47),  -- Reading on 25th of September, dose from 5th to 24th of September
-       ('2024-10-10', '2024-09-25', '2024-10-09', 0.24),  -- Reading on 10th of October, dose from 25th of September to 9th of October
-       ('2024-11-01', '2024-10-10', '2024-10-31', 0.15),  -- Reading on 1st of November, dose from 10th of October to 31st of October  
-	   ('2024-11-15', '2024-11-01', '2024-11-14', 0.38),  -- Reading on 15th of Nov, dose from 1st to 14th of Nov
-       ('2024-12-05', '2024-11-15', '2024-12-04', 0.26),  -- Reading on 5th of Dec, dose from 15th of Nov to 4th of Dec
-       ('2025-01-01', '2024-12-05', '2024-12-31', 0.43),  -- Reading on 1st of Jan, dose from 5th of Dec to 31st of Dec
-       ('2025-01-20', '2025-01-01', '2025-01-19', 0.12),  -- Reading on 20th of Jan, dose from 1st to 19th of Jan
-       ('2025-02-10', '2025-01-20', '2025-02-09', 0.21),  -- Reading on 10th of Feb, dose from 20th of Jan to 9th of Feb
-       ('2025-03-01', '2025-02-10', '2025-02-28', 0.50),  -- Reading on 1st of Mar, dose from 10th of Feb to 28th of Feb
-       ('2025-03-15', '2025-03-01', '2025-03-14', 0.37),  -- Reading on 15th of Mar, dose from 1st to 14th of Mar
-       ('2025-04-05', '2025-03-15', '2025-04-04', 0.18),  -- Reading on 5th of Apr, dose from 15th of Mar to 4th of Apr  
-       ('2025-04-20', '2025-04-05', '2025-04-19', 0.49),  -- Reading on 20th of Apr, dose from 5th to 19th of Apr
-       ('2025-05-05', '2025-04-20', '2025-05-04', 0.20)  -- Reading on 5th of May, dose from 20th of Apr to 4th of May
+VALUES ('2024-04-15', '2024-04-01', '2024-04-30', 0.35),  
+       ('2024-05-10', '2024-04-01', '2024-05-31', 0.22),  
+       ('2024-06-05', '2024-05-01', '2024-06-30', 0.19),  
+       ('2024-07-01', '2024-06-01', '2024-06-30', 0.41),  
+       ('2024-07-20', '2024-07-01', '2024-07-31', 0.29),  
+       ('2024-08-15', '2024-07-01', '2024-08-31', 0.17),  
+       ('2024-09-05', '2024-08-01', '2024-09-30', 0.33),  
+       ('2024-09-25', '2024-09-01', '2024-09-30', 0.47), 
+       ('2024-10-10', '2024-09-01', '2024-10-31', 0.24),  
+       ('2024-11-01', '2024-10-01', '2024-10-31', 0.15), 
+       ('2024-11-15', '2024-11-01', '2024-11-30', 0.38), 
+       ('2024-12-05', '2024-11-01', '2024-12-31', 0.26),  
+       ('2025-01-01', '2024-12-01', '2024-12-31', 0.43),  
+       ('2025-01-20', '2025-01-01', '2025-01-31', 0.12),  
+       ('2025-02-10', '2025-01-01', '2025-02-28', 0.21), 
+       ('2025-03-01', '2025-02-01', '2025-02-28', 0.50), 
+       ('2025-03-15', '2025-03-01', '2025-03-31', 0.37),  
+       ('2025-04-05', '2025-03-01', '2025-04-30', 0.18),  
+       ('2025-04-20', '2025-04-01', '2025-04-30', 0.49), 
+       ('2025-05-05', '2025-04-01', '2025-05-31', 0.20)  
 
 INSERT INTO extSoldier (Surname, IdNumber, firstName)
 VALUES
@@ -69,67 +69,67 @@ VALUES
 ('Hall', 'EXT001122', 'Emily'),
 ('Wood', 'EXT554466', 'Matthew'),
 ('Green', 'EXT998800', 'Stephanie'),
-('King', 'EXT332244', 'Daniella'),  -- Added more entries
+('King', 'EXT332244', 'Daniella'),  
 ('Nelson', 'EXT886677', 'Christopher'),
 ('Baker', 'EXT220011', 'Samantha'),
 ('Harris', 'EXT774455', 'Andrew'),
-('Clark', 'EXT118899', 'Olivia'),  -- Duplicate surname (possible in real data)
-('Lewis', 'EXT442233', 'Benjamin'),  -- Duplicate surname (possible in real data)
-('Rodriguez', 'EXT996677', 'Isabella'),  -- Duplicate surname (possible in real data)
+('Clark', 'EXT118899', 'Olivia'),  
+('Lewis', 'EXT442233', 'Benjamin'),  
+('Rodriguez', 'EXT996677', 'Isabella'),  
 ('Nguyen', 'EXT330011', 'David'),
-('Nguyen', 'EXT884455', 'Sophia'),  -- Duplicate surname (possible in real data)
+('Nguyen', 'EXT884455', 'Sophia'), 
 ('Lee', 'EXT228899', 'Ava'),
-('Robinson', 'EXT772233', 'Mia'),  -- Duplicate surname (possible in real data)
-('Walker', 'EXT116677', 'Charlotte'),  -- Duplicate surname (possible in real data)
-('Allen', 'EXT660011', 'Elizabeth'),  -- Duplicate first name (possible in real data)
+('Robinson', 'EXT772233', 'Mia'),  
+('Walker', 'EXT116677', 'Charlotte'),  
+('Allen', 'EXT660011', 'Elizabeth'),  
 ('Garcia', 'EXT004455', 'Emily')
 	   
-INSERT INTO Soldier (ArmyNumber, FirstName, surName, dateOfBirth, grou, nationality, language, street, nr, city, postalCode, Country, SerialNumber)
+INSERT INTO Soldier (ArmyNumber, FirstName, surName, dateOfBirth, group, nationality, language, street, nr, city, postalCode, Country, SerialNumber)
 VALUES
-(2171544, 'John', 'Doe', '1980-01-01', 'A', 'US', 'English', '123 Main St', '10', 'Anytown', '12345', 'USA', 1000),  
-(1852276, 'Jane', 'Smith', '1985-02-02', 'B', 'UK', 'English', '456 Elm St', '20', 'London', 'E1 5BT', 'UK', 1001),   
-(1963253, 'Peter', 'Jones', '1990-03-03', 'C', 'Canada', 'English', '789 Maple Ave', '30', 'Toronto', 'M5H 2N2', 'Canada', 1002),  
-(2252278, 'Mary', 'Brown', '1995-04-04', 'D', 'Australia', 'English', '1011 Oak Ln', '40', 'Sydney', '2000', 'Australia', 1003), 
-(2321458, 'David', 'Williams', '2000-05-05', 'E', 'New Zealand', 'English', '1213 Pine Rd', '50', 'Auckland', '1010', 'New Zealand', 1004),  
-(1200569, 'Sarah', 'Miller', '2010-06-06', 'H', 'Germany', 'German', '1415 Linden Ave', '60', 'Berlin', '10117', 'Germany', 1005),  
-(1705236, 'Michael', 'Taylor', '2015-07-07', 'I', 'France', 'French', '1617 Birch St', '70', 'Paris', '75001', 'France', 1006),  
-(1893647, 'Elizabeth', 'Davis', '2020-08-08', 'J', 'Spain', 'Spanish', '1819 Elmwood Dr', '80', 'Madrid', '28001', 'Spain', 1007),  
-(2104597, 'Richard', 'Lee', '2021-09-09', 'K', 'Italy', 'Italian', '2021 Forest Ln', '90', 'Rome', '00163', 'Italy', 1008), 
-(1785239, 'Andreas', 'Willekens', '2021-09-09', 'K', 'Belgium', 'Dutch', '2023 Waterkant', '11', 'Brussels', '1000', 'Belgium', 1009),  
-(1785214, 'William', 'Garcia', '2012-11-11', 'M', 'Mexico', 'Spanish', '2223 Oak St', '110', 'Mexico City', '06600', 'Mexico', 1010),  
-(2045761, 'Jennifer', 'Robinson', '2013-12-12', 'N', 'South Africa', 'English', '2425 Pine Rd', '120', 'Johannesburg', '20011', 'South Africa', 1011),
-(1045830, 'Daniel', 'Johnson', '1975-01-25', 'A', 'USA', 'English', '2627 Maple Ave', '130', 'New York', '10001', 'USA', 1012),
-(1423782, 'Jessica', 'Wilson', '1982-02-14', 'B', 'UK', 'English', '2829 Elm St', '140', 'Manchester', 'M1 5AN', 'UK', 1013),
-(1872697, 'Christopher', 'Clark', '1987-03-03', 'C', 'Canada', 'English', '3031 Oak Ln', '150', 'Vancouver', 'V6B 4N5', 'Canada', 1014),
-(2257896, 'Margaret', 'Lewis', '1992-04-10', 'D', 'Australia', 'English', '3233 Birch St', '160', 'Melbourne', '3000', 'Australia', 1015),
-(2107895, 'Robert', 'Walker', '1997-05-21', 'E', 'New Zealand', 'English', '3435 Pine Rd', '170', 'Wellington', '6011', 'New Zealand', 1016),
-(1921475, 'Laura', 'Moore', '2005-06-15', 'H', 'Germany', 'German', '3637 Linden Ave', '180', 'Hamburg', '20095', 'Germany', 1017),
-(1628716, 'Joseph', 'King', '2012-07-08', 'I', 'France', 'French', '3839 Birch St', '190', 'Lyon', '69001', 'France', 1018),
-(1456723, 'Emily', 'Wright', '2017-08-22', 'J', 'Spain', 'Spanish', '4041 Elmwood Dr', '200', 'Barcelona', '08001', 'Spain', 1019),
-(2214756, 'Matthew', 'Allen', '2019-09-16', 'K', 'Italy', 'Italian', '4243 Forest Ln', '210', 'Milan', '20121', 'Italy', 1020),
-(2148630, 'Stephanie', 'Scott', '2020-10-05', 'K', 'Belgium', 'Dutch', '4445 Waterkant', '220', 'Antwerp', '2000', 'Belgium', 1021)
+(2171544, 'John', 'Doe', '1980-01-01', 'group1', 'US', 'EN, '123 Main St', '10', 'Anytown', '12345', 'USA', 1000),  
+(1852276, 'Jane', 'Smith', '1985-02-02', 'group1', 'UK', 'EN', '456 Elm St', '20', 'London', 'E1 5BT', 'UK', 1001),   
+(1963253, 'Peter', 'Jones', '1990-03-03', 'group1', 'CA', 'EN', '789 Maple Ave', '30', 'Toronto', 'M5H 2N2', 'Canada', 1002),  
+(2252278, 'Mary', 'Brown', '1995-04-04', 'group1', 'AU', 'EN', '1011 Oak Ln', '40', 'Sydney', '2000', 'Australia', 1003), 
+(2321458, 'David', 'Williams', '2000-05-05', 'group1', 'NZ', 'EN', '1213 Pine Rd', '50', 'Auckland', '1010', 'New Zealand', 1004),  
+(1200569, 'Sarah', 'Miller', '2010-06-06', 'group1', 'DE', 'DE', '1415 Linden Ave', '60', 'Berlin', '10117', 'Germany', 1005),  
+(1705236, 'Michael', 'Taylor', '2015-07-07', 'group1', 'FR', 'FR', '1617 Birch St', '70', 'Paris', '75001', 'France', 1006),  
+(1893647, 'Elizabeth', 'Davis', '2020-08-08', 'group1', 'ES', 'ES', '1819 Elmwood Dr', '80', 'Madrid', '28001', 'Spain', 1007),  
+(2104597, 'Richard', 'Lee', '2021-09-09', 'group1', 'IT', 'IT', '2021 Forest Ln', '90', 'Rome', '00163', 'Italy', 1008), 
+(1785239, 'Andreas', 'Willekens', '2021-09-09', 'group1', 'BE', 'NL', '2023 Waterkant', '11', 'Brussels', '1000', 'Belgium', 1009),  
+(1765214, 'William', 'Garcia', '2012-11-11', 'group1', 'MX', 'ES', '2223 Oak St', '110', 'Mexico City', '06600', 'Mexico', 1010),  
+(2045761, 'Jennifer', 'Robinson', '2013-12-12', 'group1', 'ZA', 'EN', '2425 Pine Rd', '120', 'Johannesburg', '20011', 'South Africa', 1011),
+(1045830, 'Daniel', 'Johnson', '1975-01-25', 'group1', 'US', 'EN', '2627 Maple Ave', '130', 'New York', '10001', 'USA', 1012),
+(1423782, 'Jessica', 'Wilson', '1982-02-14', 'group1', 'UK', 'EN', '2829 Elm St', '140', 'Manchester', 'M1 5AN', 'UK', 1013),
+(1872697, 'Christopher', 'Clark', '1987-03-03', 'group1', 'CA', 'EN', '3031 Oak Ln', '150', 'Vancouver', 'V6B 4N5', 'Canada', 1014),
+(2257896, 'Margaret', 'Lewis', '1992-04-10', 'group1', 'AU', 'EN', '3233 Birch St', '160', 'Melbourne', '3000', 'Australia', 1015),
+(2107895, 'Robert', 'Walker', '1997-05-21', 'group1', 'NZ', 'EN', '3435 Pine Rd', '170', 'Wellington', '6011', 'New Zealand', 1016),
+(1921475, 'Laura', 'Moore', '2005-06-15', 'group1', 'DE', 'DE', '3637 Linden Ave', '180', 'Hamburg', '20095', 'Germany', 1017),
+(1628716, 'Joseph', 'King', '2012-07-08', 'group1', 'FR', 'FR', '3839 Birch St', '190', 'Lyon', '69001', 'France', 1018),
+(1456723, 'Emily', 'Wright', '2017-08-22', 'group1', 'ES', 'ES', '4041 Elmwood Dr', '200', 'Barcelona', '08001', 'Spain', 1019),
+(2214756, 'Matthew', 'Allen', '2019-09-16', 'group1', 'IT', 'IT', '4243 Forest Ln', '210', 'Milan', '20121', 'Italy', 1020),
+(2148630, 'Stephanie', 'Scott', '2020-10-05', 'group1', 'BE', 'NL', '4445 Waterkant', '220', 'Antwerp', '2000', 'Belgium', 1021)
 
 INSERT INTO Soldier_phones (phones, ArmyNumber)
 VALUES
-(1234567890, 10001),  -- Phone number for soldier with ArmyNumber 10001
-(1234567891, 10002),  -- Phone number for soldier with ArmyNumber 10002
-(1234567892, 10003),  -- Phone number for soldier with ArmyNumber 10003
-(1234567893, 10004),  -- Phone number for soldier with ArmyNumber 10004
-(1234567894, 10005),  -- Phone number for soldier with ArmyNumber 10005
-(1234567895, 10006),  -- Phone number for soldier with ArmyNumber 10006
-(1234567896, 10007),  -- Phone number for soldier with ArmyNumber 10007
-(1234567897, 10008),  -- Phone number for soldier with ArmyNumber 10008
-(1234567898, 10009),  -- Phone number for soldier with ArmyNumber 10009
-(1234567899, 10010),  -- Phone number for soldier with ArmyNumber 10010
-(1234567800, 10011),  -- Phone number for soldier with ArmyNumber 10011 (assuming no duplicates in 'phones' column)
-(1234567801, 10012),  -- Phone number for soldier with ArmyNumber 10012
-(5678901234, 10013),  -- Phone number for soldier with ArmyNumber 10013
-(5678905678, 10014),  -- Phone number for soldier with ArmyNumber 10014
-(5678910123, 10015),  -- Phone number for soldier with ArmyNumber 10015
-(5678914567, 10016),  -- Phone number for soldier with ArmyNumber 10016
-(5678919012, 10017),  -- Phone number for soldier with ArmyNumber 10017
-(4567898765, 10018),  -- Phone number for soldier with ArmyNumber 10018
-(4567812345, 10019),  -- Phone number for soldier with ArmyNumber 10019
-(4567856789, 10020),  -- Phone number for soldier with ArmyNumber 10020
-(4567801234, 10021),  -- Phone number for soldier with ArmyNumber 10021
-(4567834567, 10022)  -- Phone number for soldier with ArmyNumber 10022)
+(1234567890, 2171544),  
+(1234567891, 1852276),  
+(1234567892, 1963253), 
+(1234567893, 2252278),  
+(1234567894, 2321458),  
+(1234567895, 1200569),  
+(1234567896, 1705236),  
+(1234567897, 1893647),  
+(1234567898, 2104597),  
+(1234567899, 1785239),  
+(1234567800, 1765214),  
+(1234567801, 2045761),  
+(5678901234, 1045830),  
+(5678905678, 1423782),  
+(5678910123, 1872697),  
+(5678914567, 2257896),  
+(5678919012, 2107895),  
+(4567898765, 1921475),  
+(4567812345, 1628716),  
+(4567856789, 1456723),  
+(4567801234, 2214756),  
+(4567834567, 2148630)  
