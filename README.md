@@ -11,6 +11,7 @@ Hoi iedereen, kdenk da het effectief makkelijker is om te werken met github (is 
     Page 3 with Table: http://localhost:8080/page3
 
   Hoi iedereen dit is een test (hoe tabellen aanmaken)
+  |test|test|test|test|test|
   |-|-|-|-|-|
   |dit|is|gewoon|een|test|
   |mijn|naam|is|Wellens|Andreas|
