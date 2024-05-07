@@ -1,56 +1,75 @@
-using HTTP
-
-function handle_request(req::HTTP.Request)
-  # Extract requested path
-  path = req.path
-
-  # Define response based on path
-  if path == "/"
-    response = HTTP.Response(200, "<h1>Welcome to the main page!</h1>")
-  elseif path == "/page1"
-    response = HTTP.Response(200, "<h1>This is page 1 content</h1>")
-  elseif path == "/page2"
-    response = HTTP.Response(200, "<h1>This is page 2 content</h1>")
-  elseif path == "/page3"
-    response = HTTP.Response(200, """
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Page 3 with Table</title>
-        </head>
-        <body>
-            <h1>Page 3 with HTML Table</h1>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>City</th>
-                </tr>
-                <tr>
-                    <td>Alice</td>
-                    <td>30</td>
-                    <td>Brussels</td>
-                </tr>
-                <tr>
-                    <td>Bob</td>
-                    <td>25</td>
-                    <td>London</td>
-                </tr>
-                <tr>
-                    <td>Charlie</td>
-                    <td>40</td>
-                    <td>Paris</td>
-                </tr>
-            </table>
-        </body>
-        </html>""")
-  else
-    response = HTTP.Response(404, "<h1>Page not found!</h1>")
-  end
-
-  # Return the response
-  return response
+begin
+	using Pkg
+	const deps = [pair.second for pair in Pkg.dependencies()]
+	const direct_deps = filter(p -> p.is_direct_dep, deps)
+	const pkgs = [x.name for x in direct_deps]
+	if "HtmlTables" ∉ pkgs
+	    @info "Installing HtmlTables for Julia $(VERSION)..."
+	    Pkg.add(url="https://github.com/vanderpp/HtmlTables.jl/")
+	end
+	if "HTTP" ∉ pkgs
+	    @info "Installing HTTP for Julia $(VERSION)..."
+	    Pkg.add("HTTP")
+	end
+	
 end
-server = HTTP.Server(:port => 8080, :handler => handle_request)
-println("Server started on port 8080")
+
+using HtmlTables, HTTP
+
+begin
+	const ROUTER = HTTP.Router()
+	
+	function home(req::HTTP.Messages.Request)
+	"<html>
+		<head>
+		<title> Statische webpagina 3.1 </title>
+		</head>
+	
+		<body>
+		<h1>Maelfeyt, Mille, Ulrichts, Vandersmissen, Ulrichts, Wellens</h1>
+		<p> Statische webpagina 3.1 </p>
+	
+		<a href=/page>Visit first page</a>
+		<br>
+		<br>
+		<a href=/secondPage>Visit second page</a>
+		
+	
+		</body>
+	 </html>"
+	end
+	function page(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+			<title> Eerste pagina</title>
+			</head>
+
+			<body>
+			<h1> Welkom op de eerste pagina </h1>
+			<p> Eerste pagina </p> 
+			<a href=/>Return</a>
+			</body>
+		</html>"
+	end
+	
+	function secondPage(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+			<title> Tweede pagina </title>
+			</head>
+
+			<body>
+			<h1> Welkom op de tweede pagina </h1>
+			<p> Tweede pagina </p>
+			<a href=/>Return</a>
+			</body>
+		</html>"
+	end
+		HTTP.register!(ROUTER, "GET", "/secondPage", secondPage)
+		HTTP.register!(ROUTER, "GET", "/page", page)
+		HTTP.register!(ROUTER, "GET", "/" , home)
+end
+
+#server = HTTP.serve!(ROUTER, "127.0.0.1", 80)
+
+#close(server)
