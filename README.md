@@ -10,6 +10,11 @@ Hoi iedereen, kdenk da het effectief makkelijker is om te werken met github (is 
     Page 2: http://localhost:8080/page2
     Page 3 with Table: http://localhost:8080/page3
 
+  Hoi iedereen dit is een test (hoe tabellen aanmaken)
+  |-|-|-|-|-|-|-|-|
+  |dit|is|gewoon|een|test|
+  |mijn|naam|is|Wellens|Andreas|
+
 Using GitHub for Collaboration:
 
   Create a GitHub Repository:
