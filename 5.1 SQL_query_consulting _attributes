@@ -1,5 +1,3 @@
 SELECT firstName, surname, nationality, language
 FROM Soldier;
 
-SELECT firstName, surname
-FROM extSoldier
