@@ -23,7 +23,7 @@ VALUES
 (1020, instadose+)
 (1021, instadose+)  
 
-INSERT INTO DosimeterReading (dateReadOut, dateDoseFrom, dateDoseTo, dosemsv)
+INSERT INTO DosimeterReading (dateReadOut, dateDoseFrom, dateDoseTo, dosemsv, SerialNumber)
 VALUES ('2024-04-15', '2024-04-01', '2024-04-30', 0.35),  	
        ('2024-05-10', '2024-04-01', '2024-05-31', 0.22),  
        ('2024-06-05', '2024-05-01', '2024-06-30', 0.19),  
