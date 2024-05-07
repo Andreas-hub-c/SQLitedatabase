@@ -1,64 +1,60 @@
-CREATE TABLE dosiMeter
-(
-  SerialNumber INTEGER NOT NULL CHECK (SerialNumber >= 0001 AND SerialNumber <= 9999),
-  type INT NOT NULL,
-  PRIMARY KEY (SerialNumber)
-);
-
-CREATE TABLE DosiMeterReading (
-  dateReadOut DATE NOT NULL,
-  dateDoseFrom DATE NOT NULL,
-  dateDoseTo DATE NOT NULL,
-  dosemsv INT NOT NULL,
-  PRIMARY KEY (dateReadOut),
-  UNIQUE (dateDoseFrom),
-  UNIQUE (dateDoseTo),
-  UNIQUE (dosemsv)
-);
-
-CREATE TABLE extSoldier (
-  Surname TEXT NOT NULL,
-  IdNumber TEXT NOT NULL, -- Assuming this is a text-based ID
-  firstName TEXT NOT NULL,
-  PRIMARY KEY (IdNumber)
-);
-
-CREATE TABLE Soldier (
-  ArmyNumber INTEGER NOT NULL CHECK (ArmyNumber >= 0000001 AND ArmyNumber <= 9999999),
-  FirstName TEXT NOT NULL,
-  surName TEXT NOT NULL,
+CREATE TABLE Soldier(
+  ArmyNumber INT NOT NULL,
+  firstName VARCHAR(255) NOT NULL,
+  surName VARCHAR(255) NOT NULL,
   dateOfBirth DATE NOT NULL,
-  grou TEXT NOT NULL,  -- Assuming group is a text value
-  nationality TEXT NOT NULL,
-  language TEXT NOT NULL,
-  street TEXT NOT NULL,
-  nr TEXT NOT NULL,  -- Assuming house number is a text value (could be INT if it's purely numeric)
-  city TEXT NOT NULL,
-  postalCode TEXT NOT NULL,
-  Country TEXT NOT NULL,
-  PRIMARY KEY (ArmyNumber),
-  FOREIGN KEY (SerialNumber) REFERENCES dosiMeter(SerialNumber)
+  "group1" VARCHAR(255) NOT NULL,
+  nationality VARCHAR(2) NOT NULL,
+  language VARCHAR(2) NOT NULL,
+  street VARCHAR(255) NOT NULL,
+  nr INT NOT NULL,
+  city VARCHAR NOT NULL,
+  postalCode VARCHAR(5) NOT NULL,
+  country VARCHAR(2) NOT NULL,
+  PRIMARY KEY (ArmyNumber)
 );
 
-
-CREATE TABLE Soldier_phones
-(
+CREATE TABLE Soldier_Phone(
   phones INT NOT NULL,
   ArmyNumber INT NOT NULL,
   PRIMARY KEY (phones, ArmyNumber),
   FOREIGN KEY (ArmyNumber) REFERENCES Soldier(ArmyNumber)
 );
 
-CREATE TABLE DosimeterAssignment(
+CREATE TABLE dosiMeter(
+  SerialNumber INTEGER NOT NULL CHECK (SerialNumber >= 0001 AND SerialNumber <= 9999),
+  Type VARCHAR(255) NOT NULL,
+  PRIMARY KEY (SerialNumber)
+);
+
+CREATE TABLE extSoldier(
+  IdNumber INT NOT NULL,
+  surName VARCHAR(255) NOT NULL,
+  firstName VARCHAR(255) NOT NULL,
+  PRIMARY KEY (IdNumber)
+);
+
+CREATE TABLE DosiMeterReading(
+  dateReadOut DATE NOT NULL,
+  dateDoseFrom DATE NOT NULL,
+  dateDoseTo DATE NOT NULL,
+  dosemv INT NOT NULL,
+  SerialNumber INT NOT NULL,
+  PRIMARY KEY (dateReadOut, SerialNumber),
+  FOREIGN KEY (SerialNumber) REFERENCES dosiMeter(SerialNumber)
+);
+
+CREATE TABLE dosiMeterAssignement(
   ArmyNumber INT NOT NULL,
   SerialNumber INT NOT NULL,
   PRIMARY KEY (ArmyNumber),
-  FOREIGN KEY (ArmyNumber) REFERENCES Soldier (ArmyNumber),
-  FOREIGN KEY (SerialNumber) REFERENCES dosiMeter (SerialNumber)
+  FOREIGN KEY (ArmyNumber) REFERENCES Soldier(ArmyNumber),
+  FOREIGN KEY (SerialNumber) REFERENCES dosiMeter(SerialNumber)
 );
+DROP TABLE dosiMeterAssignment;
+DROP TABLE DosiMeterReading;
+DROP TABLE extSoldier;
+DROP TABLE dosiMeter;
+DROP TABLE Soldier_Phone;
+DROP TABLE Soldier
 
-DROP TABLE Dosimeter;
-DROP TABLE DosimeterReading;
-DROP TABLE Soldier;
-DROP TABLE Soldier_phones;
-DROP TABLE DosimeterAssignment;
