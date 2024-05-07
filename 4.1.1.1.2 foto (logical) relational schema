@@ -1,6 +1,1 @@
-Soldier (armyNumber, firstName, surName, dateOfBirth, group, nationality, language, street, nr, city, postalCode, country)
-Phones (armyNumber, phones)
-ExtSolder (idNumber, firtsName, surname)
-DosiMeter (serialNumber, dateReadOut, type)
-DosimeterAssignment (armyNumber, serialNumber )
-DosiMeterReading (serialNumber, dateReadOUt, dateDoseFrom, dateDoseto, dosemsv)
+
