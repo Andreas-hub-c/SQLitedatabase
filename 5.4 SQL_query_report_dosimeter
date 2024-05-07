@@ -1,21 +1,9 @@
 SELECT
-  s.ArmyNumber,
-  s.firstName,
-  s.surname,
-  s.SerialNumber,  -- Assuming 'SerialNumber' is in the 'Soldier' table
-  d.type
-FROM Soldier AS s
-JOIN dosimeter AS d ON s.SerialNumber = d.SerialNumber; 
-
-
-
--- beiden werken, is miss makkelijker om af te korten (AS s & AS d)
-
-SELECT
   Soldier.ArmyNumber,
   Soldier.firstName,
-  Soldier.surname,
-  Soldier.SerialNumber,  -- Assuming 'SerialNumber' is in the 'Soldier' table
-  dosiMeter.type
+  Soldier.surName,
+  dosiMeterAssignement.SerialNumber,
+  dosimeter.Type
 FROM Soldier
-JOIN dosimeter ON Soldier.SerialNumber = dosimeter.SerialNumber; 
+JOIN dosiMeterAssignement ON Soldier.ArmyNumber = dosiMeterAssignement.ArmyNumber
+JOIN dosiMeter ON dosiMeterAssignement.SerialNumber = dosiMeter.SerialNumber;
