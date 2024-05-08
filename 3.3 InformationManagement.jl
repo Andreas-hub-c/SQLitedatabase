@@ -1,3 +1,4 @@
+
 begin
 	using Pkg;
 	Pkg.add(url="https://github.com/vanderpp/HtmlTables.jl/")
@@ -5,7 +6,7 @@ end
 
 using HtmlTables, HTTP
 
-ENV["htmltables_dbpath"]=raw"C:\Users\mille.b\Documents\juliaSC622\weaponshop2324_SOURCE.db" # verwijs hier naar je eigen dbpath, anders zal de code niet werken :)
+ENV["htmltables_dbpath"]=raw"C:\Users\wellens.a\Documents\juliaSC622\weaponshop2324_SOURCE.db" # verwijs hier naar je eigen dbpath, anders zal de code niet werken :)
 
 htmlTable("soldier")
 
@@ -108,6 +109,6 @@ begin
 		HTTP.register!(ROUTER, "GET", "/" , home)
 end
 
-server = HTTP.serve!(ROUTER, "127.0.0.1", 80)
+server = HTTP.serve!(ROUTER, "127.0.0.1", 50)
 
 #close(server)
