@@ -1,0 +1,43 @@
+begin
+	using Pkg;
+	Pkg.add(url="https://github.com/vanderpp/HtmlTables.jl/")
+end
+
+using HtmlTables, HTTP
+
+ENV["htmltables_dbpath"]=raw"C:\Users\wellens.a\Desktop\information management test5.db" # verwijs hier naar je eigen dbpath, anders zal de code niet werken :)
+
+
+htmlTable("dosimeterassignment")
+
+
+function dosimeterassignment(req::HTTP.Messages.Request)
+    @info "weapon assigned" #input detected
+    sqlQry = "SELECT
+        s.ArmyNumber,
+        dmr.SerialNumber
+        FROM 
+        Soldier s
+            INNER JOIN dosimiterassignment dmr ON s.Armynumber = dmr.SerialNumber
+            WHERE Armynumber = $Soldier
+            ;
+        "
+    "<html>
+    <title>Soldier table </title>
+    <body>
+    $(htmlTableForQuery(sqlQRy))
+    </body>
+    </html>
+    "
+end
+
+
+HTTP.register!(ROUTER, "GET", "/dosimeterassignment", dosimeterassignment)
+
+
+
+#server = HTTP.serve!(ROUTER, "127.0.0.1", 80)
+
+close(server)
+
+          
