@@ -73,11 +73,36 @@ begin
 	end
 	
 	function thirdPage(req::HTTP.Messages.Request)
-		HtmlString
+	"<html>
+			<head>
+				<title> Third page </title>
+
+			<style>
+				table, td, th{
+				border:1px solid black;
+				}
+			</style>
+			</head>
+
+			<body>
+				<h1> Welcome to the third page with datatable </h1>
+				<p> Third page </p>
+				<a href=/>Return to Homepage</a>
+				<br>
+				<br>
+			<table>
+				<tr><th>title1</th><th>title2</th><th>title3</th><th>title4</th></tr>
+				<tr><td>data11</td><td>data21</td><td>data31</td><td>data41</td></tr>
+				<tr><td>data12</td><td>data22</td><td>data32</td><td>data42</td></tr>
+				<tr><td>data13</td><td>data23</td><td>data33</td><td>data43</td></tr>
+				<tr><td>data14</td><td>data24</td><td>data34</td><td>data44</td></tr>
+			</table>
+			</body>
+		</html>"	
 	end
 
 	
-		HTTP.register!(ROUTER,"GET","/dataPage", thirdPage)
+		HTTP.register!(ROUTER,"GET","/thirdPage", thirdPage)
 		HTTP.register!(ROUTER, "GET", "/secondPage", secondPage)
 		HTTP.register!(ROUTER, "GET", "/page", page)
 		HTTP.register!(ROUTER, "GET", "/" , home)
