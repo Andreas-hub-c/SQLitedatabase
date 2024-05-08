@@ -5,7 +5,7 @@ end
 
 using HtmlTables, HTTP
 
-ENV["htmltables_dbpath"]=raw"C:\Users\mille.b\Documents\juliaSC622\weaponshop2324_SOURCE.db" -- verwijs hier naar je eigen dbpath, anders zal de code niet werken :)
+ENV["htmltables_dbpath"]=raw"C:\Users\mille.b\Documents\juliaSC622\weaponshop2324_SOURCE.db" # verwijs hier naar je eigen dbpath, anders zal de code niet werken :)
 
 htmlTable("soldier")
 
