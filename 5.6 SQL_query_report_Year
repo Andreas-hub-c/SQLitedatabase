@@ -1,7 +1,7 @@
 SELECT s.firstName,
        s.surName,
        s.armyNumber,
-       SUM(dr.dosemv) 
+       SUM(dr.dosemv) AS YearlyDosimeterReading
 FROM Soldier s, DosimeterAssignment da, DosiMeterReading dmr
 WHERE s.armyNumber = da.armyNumber
   AND da.serialNumber = dmr.serialNumber
@@ -9,20 +9,3 @@ WHERE s.armyNumber = da.armyNumber
   AND dmr.dateDoseFrom BETWEEN "2023-01-01" AND "2023-12-31"  -- geef hier de data in waartussen het moet liggen (1jaar)
 GROUP BY s.firstName, s.surName, s.armyNumber;
 
-volgende is normaal gezien fout, bovenste juist : nakijken !!!
-SELECT
-  Soldier.firstName,
-  Soldier.surName,
-  Soldier.ArmyNumber,
-  dosiMeter.SerialNumber,
-  dmr.DateReadOut, 
-  dmr.DateDoseFrom,
-  dmr.DateDoseTo,
-  dmr.dosemv
-FROM Soldier
-JOIN dosiMeterAssignement da ON Soldier.ArmyNumber = da.ArmyNumber
-JOIN dosiMeter ON da.SerialNumber = dosiMeter.SerialNumber
-JOIN dosiMeterReading dmr ON dm.SerialNumber = dmr.SerialNumber 
-WHERE YEAR(dmr.DateReadOut) = <chosen_year>;                           -- gelieve hier het jaar in te geven
-GROUP BY Soldier.firstName, Soldier.surName, Soldier.ArmyNumber, dosiMeter.SerialNumber, dmr.DateReadOut, dmr.DateDoseFrom, dmr.DateDoseTo, dmr.dosemv
-ORDER BY Soldier.firstName, Soldier.surName, Soldier.ArmyNumber;
