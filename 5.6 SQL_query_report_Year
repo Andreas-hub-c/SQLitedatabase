@@ -1,3 +1,15 @@
+SELECT s.firstName,
+       s.surName,
+       s.armyNumber,
+       SUM(dr.dosemv) 
+FROM Soldier s, DosimeterAssignment da, DosiMeterReading dmr
+WHERE s.armyNumber = da.armyNumber
+  AND da.serialNumber = dmr.serialNumber
+  AND dmr.serialNumber = "<serialnr_dmr>"  -- geef hier het serienummer voor de dosimeterreading in 
+  AND dmr.dateDoseFrom BETWEEN "2023-01-01" AND "2023-12-31"  -- geef hier de data in waartussen het moet liggen (1jaar)
+GROUP BY s.firstName, s.surName, s.armyNumber;
+
+volgende is normaal gezien fout, bovenste juist : nakijken !!!
 SELECT
   Soldier.firstName,
   Soldier.surName,
