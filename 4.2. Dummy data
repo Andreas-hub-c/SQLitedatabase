@@ -531,30 +531,30 @@ VALUES
 ('Allen', 'EXT660011', 'Elizabeth'),  
 ('Garcia', 'EXT004455', 'Emily')
 	   
-INSERT INTO Soldier (ArmyNumber, firstName, surName, dateOfBirth, grou, nationality, language, street, nr, city, postalCode, Country, SerialNumber) -- we noemen "group" hier (en in sql) "grou" aangazien hij hem anders als functie identificeert
+INSERT INTO Soldier (ArmyNumber, firstName, surName, dateOfBirth, grou, nationality, language, street, nr, city, postalCode, Country) -- we noemen "group" hier (en in sql) "grou" aangazien hij hem anders als functie identificeert
 VALUES
-(2171544, 'John', 'Doe', '1980-01-01', 'group1', 'US', 'EN', '123 Main St', '10', 'Anytown', '12345', 'USA', 1000),  
-(1852276, 'Sarah', 'Jones', '1985-02-02', 'group1', 'UK', 'EN', '456 Elm St', '20', 'London', 'E1 5BT', 'UK', 1001),   
-(1963253, 'Michael', 'Garcia', '1990-03-03', 'group1', 'CA', 'EN', '789 Maple Ave', '30', 'Toronto', 'M5H 2N2', 'Canada', 1002),  
-(2252278, 'Mary', 'Brown', '1995-04-04', 'group1', 'AU', 'EN', '1011 Oak Ln', '40', 'Sydney', '2000', 'Australia', 1003), 
-(2321458, 'David', 'Williams', '2000-05-05', 'group1', 'NZ', 'EN', '1213 Pine Rd', '50', 'Auckland', '1010', 'New Zealand', 1004),  
-(1200569, 'Jessica', 'Allen', '2010-06-06', 'group1', 'DE', 'DE', '1415 Linden Ave', '60', 'Berlin', '10117', 'Germany', 1005),  
-(1705236, 'Michael', 'Taylor', '2015-07-07', 'group1', 'FR', 'FR', '1617 Birch St', '70', 'Paris', '75001', 'France', 1006),  
-(1893647, 'Elizabeth', 'Davis', '2020-08-08', 'group1', 'ES', 'ES', '1819 Elmwood Dr', '80', 'Madrid', '28001', 'Spain', 1007),  
-(2104597, 'Benjamin', 'Lewis', '2021-09-09', 'group1', 'IT', 'IT', '2021 Forest Ln', '90', 'Rome', '00163', 'Italy', 1008), 
-(1785239, 'Andreas', 'Willekens', '2021-09-09', 'group1', 'BE', 'NL', '2023 Waterkant', '11', 'Brussels', '1000', 'Belgium', 1009),  
-(1765214, 'William', 'Gonzalez', '2012-11-11', 'group1', 'MX', 'ES', '2223 Oak St', '110', 'Mexico City', '06600', 'Mexico', 1010),  
-(2045761, 'Jennifer', 'Robinson', '2013-12-12', 'group1', 'ZA', 'EN', '2425 Pine Rd', '120', 'Johannesburg', '20011', 'South Africa', 1011),
-(1045830, 'Joseph', 'Young', '1975-01-25', 'group1', 'US', 'EN', '2627 Maple Ave', '130', 'New York', '10001', 'USA', 1012),
-(1423782, 'Jessica', 'Wilson', '1982-02-14', 'group1', 'UK', 'EN', '2829 Elm St', '140', 'Manchester', 'M1 5AN', 'UK', 1013),
-(1872697, 'Christopher', 'Clark', '1987-03-03', 'group1', 'CA', 'EN', '3031 Oak Ln', '150', 'Vancouver', 'V6B 4N5', 'Canada', 1014),
-(2257896, 'Margaret', 'Lewis', '1992-04-10', 'group1', 'AU', 'EN', '3233 Birch St', '160', 'Melbourne', '3000', 'Australia', 1015),
-(2107895, 'Robert', 'Walker', '1997-05-21', 'group1', 'NZ', 'EN', '3435 Pine Rd', '170', 'Wellington', '6011', 'New Zealand', 1016),
-(1921475, 'David', 'Nguyen', '2005-06-15', 'group1', 'DE', 'DE', '3637 Linden Ave', '180', 'Hamburg', '20095', 'Germany', 1017),
-(1628716, 'Mia', 'Robinson', '2012-07-08', 'group1', 'FR', 'FR', '3839 Birch St', '190', 'Lyon', '69001', 'France', 1018),
-(1456723, 'Emily', 'Garcia', '2017-08-22', 'group1', 'ES', 'ES', '4041 Elmwood Dr', '200', 'Barcelona', '08001', 'Spain', 1019),
-(2214756, 'Matthew', 'Allen', '2019-09-16', 'group1', 'IT', 'IT', '4243 Forest Ln', '210', 'Milan', '20121', 'Italy', 1020),
-(2148630, 'Stephanie', 'Scott', '2020-10-05', 'group1', 'BE', 'NL', '4445 Waterkant', '220', 'Antwerp', '2000', 'Belgium', 1021)
+(2171544, 'John', 'Doe', '1980-01-01', 'group1', 'US', 'EN', '123 Main St', '10', 'Anytown', '12345', 'USA'),  
+(1852276, 'Sarah', 'Jones', '1985-02-02', 'group1', 'UK', 'EN', '456 Elm St', '20', 'London', 'E1 5BT', 'UK'),   
+(1963253, 'Michael', 'Garcia', '1990-03-03', 'group1', 'CA', 'EN', '789 Maple Ave', '30', 'Toronto', 'M5H 2N2', 'Canada'),  
+(2252278, 'Mary', 'Brown', '1995-04-04', 'group1', 'AU', 'EN', '1011 Oak Ln', '40', 'Sydney', '2000', 'Australia'), 
+(2321458, 'David', 'Williams', '2000-05-05', 'group1', 'NZ', 'EN', '1213 Pine Rd', '50', 'Auckland', '1010', 'New Zealand'),  
+(1200569, 'Jessica', 'Allen', '2010-06-06', 'group1', 'DE', 'DE', '1415 Linden Ave', '60', 'Berlin', '10117', 'Germany'),  
+(1705236, 'Michael', 'Taylor', '2015-07-07', 'group1', 'FR', 'FR', '1617 Birch St', '70', 'Paris', '75001', 'France'),  
+(1893647, 'Elizabeth', 'Davis', '2020-08-08', 'group1', 'ES', 'ES', '1819 Elmwood Dr', '80', 'Madrid', '28001', 'Spain'),  
+(2104597, 'Benjamin', 'Lewis', '2021-09-09', 'group1', 'IT', 'IT', '2021 Forest Ln', '90', 'Rome', '00163', 'Italy'), 
+(1785239, 'Andreas', 'Willekens', '2021-09-09', 'group1', 'BE', 'NL', '2023 Waterkant', '11', 'Brussels', '1000', 'Belgium'),  
+(1765214, 'William', 'Gonzalez', '2012-11-11', 'group1', 'MX', 'ES', '2223 Oak St', '110', 'Mexico City', '06600', 'Mexico'),  
+(2045761, 'Jennifer', 'Robinson', '2013-12-12', 'group1', 'ZA', 'EN', '2425 Pine Rd', '120', 'Johannesburg', '20011', 'South Africa'),
+(1045830, 'Joseph', 'Young', '1975-01-25', 'group1', 'US', 'EN', '2627 Maple Ave', '130', 'New York', '10001', 'USA'),
+(1423782, 'Jessica', 'Wilson', '1982-02-14', 'group1', 'UK', 'EN', '2829 Elm St', '140', 'Manchester', 'M1 5AN', 'UK'),
+(1872697, 'Christopher', 'Clark', '1987-03-03', 'group1', 'CA', 'EN', '3031 Oak Ln', '150', 'Vancouver', 'V6B 4N5', 'Canada'),
+(2257896, 'Margaret', 'Lewis', '1992-04-10', 'group1', 'AU', 'EN', '3233 Birch St', '160', 'Melbourne', '3000', 'Australia'),
+(2107895, 'Robert', 'Walker', '1997-05-21', 'group1', 'NZ', 'EN', '3435 Pine Rd', '170', 'Wellington', '6011', 'New Zealand'),
+(1921475, 'David', 'Nguyen', '2005-06-15', 'group1', 'DE', 'DE', '3637 Linden Ave', '180', 'Hamburg', '20095', 'Germany'),
+(1628716, 'Mia', 'Robinson', '2012-07-08', 'group1', 'FR', 'FR', '3839 Birch St', '190', 'Lyon', '69001', 'France'),
+(1456723, 'Emily', 'Garcia', '2017-08-22', 'group1', 'ES', 'ES', '4041 Elmwood Dr', '200', 'Barcelona', '08001', 'Spain'),
+(2214756, 'Matthew', 'Allen', '2019-09-16', 'group1', 'IT', 'IT', '4243 Forest Ln', '210', 'Milan', '20121', 'Italy'),
+(2148630, 'Stephanie', 'Scott', '2020-10-05', 'group1', 'BE', 'NL', '4445 Waterkant', '220', 'Antwerp', '2000', 'Belgium')
 
 INSERT INTO Soldier_Phone (phones, ArmyNumber)
 VALUES
