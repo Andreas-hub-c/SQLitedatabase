@@ -1,16 +1,13 @@
-SELECT
-  s.firstName,
-  s.surName,
-  s.ArmyNumber,
-  dm.SerialNumber,
-  dmr.DateReadOut,
-  dmr.DateDoseFrom,
-  dmr.DateDoseTo,
-  dmr.dosemv
-FROM Soldier s
-JOIN dosiMeterAssignement da ON s.ArmyNumber = da.ArmyNumber
-JOIN dosiMeter dm ON da.SerialNumber = dm.SerialNumber
-JOIN dosiMeterReading dmr ON dm.SerialNumber = dmr.SerialNumber
-WHERE dmr.DateDoseFrom = <chosen_month>;                 -- geef in <chosen_month> de juiste maand in
+SELECT s.firstName,
+       s.surName,
+       s.armyNumber,
+       dr.serialNumber,
+       dr.dateReadOut,
+       dr.dateDoseFrom,
+       dr.dateDoseTo,
+       dr.dosemsv
+FROM Soldier s, DosimeterAssignment da, DosiMeterReading dmr
+WHERE s.armyNumber = da.armyNumber
+  AND da.serialNumber = dmr.serialNumber
+  AND dmr.dateDoseFrom = "<YEAR-MONTH>";    -- geef jaar en maand in bv. 2021-04
 GROUP BY s.firstName, s.surName, s.ArmyNumber, dm.SerialNumber, dmr.DateReadOut, dmr.DateDoseFrom, dmr.DateDoseTo;
-
