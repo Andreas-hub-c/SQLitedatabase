@@ -5,7 +5,7 @@ SELECT s.firstName,
        dr.dateReadOut,
        dr.dateDoseFrom,
        dr.dateDoseTo,
-       dr.dosemsv
+       dr.dosemv
 FROM Soldier s, DosimeterAssignment da, DosiMeterReading dmr
 WHERE s.armyNumber = da.armyNumber
   AND da.serialNumber = dmr.serialNumber
