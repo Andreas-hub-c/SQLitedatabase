@@ -1,0 +1,345 @@
+begin
+	using Pkg;
+	Pkg.add(url="https://github.com/vanderpp/HtmlTables.jl/")
+end
+
+using HtmlTables, HTTP
+
+ENV["htmltables_dbpath"]=raw"C:\Users\wellens.a\Desktop\information management test5.db" # verwijs hier naar je eigen dbpath, anders zal de code niet werken :)
+
+htmlTable("soldier")
+htmlTable("dosimeter")
+htmlTable("dosimeterreading")
+htmlTable("extsoldier")
+htmlTable("dosimeterassignment")
+htmlTable("soldier_phones")
+
+
+begin
+  const ROUTER = HTTP.Router()
+
+  function home(req::HTTP.Messages.Request)
+    "<html>
+      <head>
+        <title> Dynamic Web Application </title>
+      </head>
+      <body>
+        <h1>Dynamic Web Application</h1>
+        <p> A group project of Maelfeyt, Mille, Ulrichts, Vandersmissen, Pelgrims-Rens and Wellens </p>
+        <ul>
+          <li><a href=/soldier>Soldier Table</a></li>
+          <li><a href=/extsoldier>Extsoldier Table</a></li>
+          <li><a href=/dosimeter>Dosimeter Table</a></li>
+          <li><a href=/dosimeterassignment>Dosimeter Assignment Table</a></li>
+          <li><a href=/dosimeterreading>Dosimeter Reading Table</a></li>
+          <li><a href=/soldier_phones>Soldier Phones Table</a></li>
+        </ul>
+      </body>
+    </html>"
+  end
+
+  # Function for each table page (replace with actual table names)
+  function soldier(req::HTTP.Messages.Request)
+    soldierTable = htmlTable("soldier")
+    "<html>
+      <head>
+        <style>
+          table, th, td {
+            border: 1px solid black;
+          }
+        </style>
+        <title> Soldier Table </title>
+      </head>
+      <body>
+        <h1> Soldier Table </h1>
+        <p> Data from the Soldier table </p>
+        <a href=/>Return to Home</a><br>
+        $(soldierTable)
+      </body>
+    </html>"
+  end
+
+  function extsoldier(req::HTTP.Messages.Request)
+    extsoldierTable = htmlTable("extsoldier")
+    "<html>
+      <head>
+        <style>
+          table, th, td {
+            border: 1px solid black;
+          }
+        </style>
+        <title> Extsoldier Table </title>
+      </head>
+      <body>
+        <h1> Extsoldier Table </h1>
+        <p> Data from the Extsoldier table </p>
+        <a href=/>Return to Home</a><br>
+        $(extsoldierTable)
+      </body>
+    </html>"
+  end
+
+  function dosimeter(req::HTTP.Messages.Request)
+    dosimeterTable = htmlTable("dosimeter")
+    "<html>
+      <head>
+        <style>
+          table, th, td {
+            border: 1px solid black;
+          }
+        </style>
+        <title> Dosimeter Table </title>
+      </head>
+      <body>
+        <h1> Dosimeter Table </h1>
+        <p> Data from the Dosimeter table </p>
+        <a href=/>Return to Home</a><br>
+        $(dosimeterTable)
+      </body>
+    </html>"
+  end
+  function dosimeterassignment(req::HTTP.Messages.Request)
+    dosimeterassignmentTable = htmlTable("dosimeterassignment")
+    "<html>
+        <head>
+          <style>
+            table, th, td {
+              border: 1px solid black;
+            }
+          </style>
+          <title> Dosimeter Assignment Table </title>
+        </head>
+        <body>
+          <h1> Dosimeter Assignment Table </h1>
+          <p> Data from the Dosimeter Assignment table </p>
+          <a href=/>Return to Home</a><br>
+          $(dosimeterassignmentTable)
+        </body>
+      </html>"
+  end
+
+function dosimeterreading(req::HTTP.Messages.Request)
+  dosimeterreadingTable = htmlTable("dosimeterreading")
+  "<html>
+    <head>
+      <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+      </style>
+      <title> Dosimeter Reading Table </title>
+    </head>
+    <body>
+      <h1> Dosimeter Reading Table </h1>
+      <p> Data from the Dosimeter Reading table </p>
+      <a href=/>Return to Home</a><br>
+      $(dosimeterreadingTable)
+    </body>
+  </html>"
+end
+
+function soldier_phones(req::HTTP.Messages.Request)
+  soldierphonesTable = htmlTable("soldier_phones")
+  "<html>
+    <head>
+      <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+      </style>
+      <title> Soldier Phones Table </title>
+    </head>
+    <body>
+      <h1> Soldier Phones Table </h1>
+      <p> Data from the Soldier Phones table </p>
+      <a href=/>Return to Home</a><br>
+      $(soldierphonesTable)
+    </body>
+  </html>"
+end
+
+function 5_1(req::HTTP.Messages.Request)
+  @info "5_1"
+  sqlQry = "SELECT 
+  firstName, 
+  surname, 
+  nationality, 
+  language
+  FROM Soldier;
+  "
+  "
+    <html>
+    	<head>
+	    	<style>
+	    		table, th, td {
+		    		border: 1px solid black;
+		    	}
+		    </style>
+		    <title>hoi, dit is de DosimeterAssignment</title>
+    	</head>
+    	<body>
+      	$(htmlTableForQuery(sqlQry))
+    	</body>
+    </html>
+"
+end
+function 5_2(req::HTTP.Messages.Request)
+  @info "5_2"
+  sqlQry = "SELECT 
+  firstName, 
+  surName, 
+  phones
+  FROM Soldier, Soldier_Phone
+  "
+  "
+    <html>
+    	<head>
+	    	<style>
+	    		table, th, td {
+		    		border: 1px solid black;
+		    	}
+		    </style>
+		    <title>hoi, dit is de DosimeterAssignment</title>
+    	</head>
+    	<body>
+      	$(htmlTableForQuery(sqlQry))
+    	</body>
+    </html>
+"
+end
+function 5_3(req::HTTP.Messages.Request)
+  @info "5_3"
+  sqlQry = "SELECT firstName, 
+  surname, 
+  nationality, 
+  language
+  FROM Soldier
+  WHERE ArmyNumber = 1963253;
+  "
+  "
+    <html>
+    	<head>
+	    	<style>
+	    		table, th, td {
+		    		border: 1px solid black;
+		    	}
+		    </style>
+		    <title>hoi, dit is de DosimeterAssignment</title>
+    	</head>
+    	<body>
+      	$(htmlTableForQuery(sqlQry))
+    	</body>
+    </html>
+"
+end
+function 5_4(req::HTTP.Messages.Request)
+  @info "5_4"
+  sqlQry = "SELECT
+  Soldier.ArmyNumber,
+  Soldier.firstName,
+  Soldier.surName,
+  dosiMeterAssignement.SerialNumber,
+  dosimeter.Type
+  FROM Soldier
+  JOIN dosiMeterAssignement ON Soldier.ArmyNumber = dosiMeterAssignement.ArmyNumber
+  JOIN dosiMeter ON dosiMeterAssignement.SerialNumber = dosiMeter.SerialNumber;
+  "
+  "
+    <html>
+    	<head>
+	    	<style>
+	    		table, th, td {
+		    		border: 1px solid black;
+		    	}
+		    </style>
+		    <title>hoi, dit is de DosimeterAssignment</title>
+    	</head>
+    	<body>
+      	$(htmlTableForQuery(sqlQry))
+    	</body>
+    </html>
+"
+end
+function 5_5(req::HTTP.Messages.Request)
+  @info "5_5"
+  sqlQry = "SELECT s.firstName,
+       s.surName,
+       s.armyNumber,
+       dr.serialNumber,
+       dr.dateReadOut,
+       dr.dateDoseFrom,
+       dr.dateDoseTo,
+       dr.dosemsv
+  FROM Soldier s, DosimeterAssignment da, DosiMeterReading dmr
+  WHERE s.armyNumber = da.armyNumber
+      AND da.serialNumber = dmr.serialNumber
+      AND dmr.dateDoseFrom = "2021-04";    -- geef jaar en maand in bv. 2021-04
+  GROUP BY s.firstName, s.surName, s.ArmyNumber, dm.SerialNumber, dmr.DateReadOut, dmr.DateDoseFrom, dmr.DateDoseTo;
+  "
+  "
+    <html>
+    	<head>
+	    	<style>
+	    		table, th, td {
+		    		border: 1px solid black;
+		    	}
+		    </style>
+		    <title>hoi, dit is de DosimeterAssignment</title>
+    	</head>
+    	<body>
+      	$(htmlTableForQuery(sqlQry))
+    	</body>
+    </html>
+"
+end
+function 5_6(req::HTTP.Messages.Request)
+  @info "5_6"
+  sqlQry = "SELECT s.firstName,
+       s.surName,
+       s.armyNumber,
+       SUM(dr.dosemv) 
+  FROM Soldier s, DosimeterAssignment da, DosiMeterReading dmr
+  WHERE s.armyNumber = da.armyNumber
+      AND da.serialNumber = dmr.serialNumber
+      AND dmr.serialNumber = "1004"  -- geef hier het serienummer voor de dosimeterreading in 
+      AND dmr.dateDoseFrom BETWEEN "2025-01-01" AND "2025-12-31"  -- geef hier de data in waartussen het moet liggen (1jaar)
+  GROUP BY s.firstName, s.surName, s.armyNumber;
+  "
+  "
+    <html>
+    	<head>
+	    	<style>
+	    		table, th, td {
+		    		border: 1px solid black;
+		    	}
+		    </style>
+		    <title>hoi, dit is de DosimeterAssignment</title>
+    	</head>
+    	<body>
+      	$(htmlTableForQuery(sqlQry))
+    	</body>
+    </html>
+"
+end
+
+# Register routes for all pages
+HTTP.register!(ROUTER, "GET", "/soldier", soldier)
+HTTP.register!(ROUTER, "GET", "/extsoldier", extsoldier)
+HTTP.register!(ROUTER, "GET", "/dosimeter", dosimeter)
+HTTP.register!(ROUTER, "GET", "/dosimeterassignment", dosimeterassignment)
+HTTP.register!(ROUTER, "GET", "/dosimeterreading", dosimeterreading)
+HTTP.register!(ROUTER, "GET", "/soldier_phones", soldier_phones)
+HTTP.register!(ROUTER, "GET", "/5_1", 5_1)
+HTTP.register!(ROUTER, "GET", "/5_2", 5_2)
+HTTP.register!(ROUTER, "GET", "/5_3", 5_3)
+HTTP.register!(ROUTER, "GET", "/5_4", 5_4)
+HTTP.register!(ROUTER, "GET", "/5_5", 5_5)
+HTTP.register!(ROUTER, "GET", "/5_6", 5_6)
+HTTP.register!(ROUTER, "GET", "/", home)
+end
+
+server = HTTP.serve!(ROUTER, "127.0.0.1", 50)
+
+#close(server)
+
+          
