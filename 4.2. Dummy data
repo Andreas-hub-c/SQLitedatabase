@@ -556,7 +556,7 @@ VALUES
 (2214756, 'Matthew', 'Allen', '2019-09-16', 'group1', 'IT', 'IT', '4243 Forest Ln', '210', 'Milan', '20121', 'Italy', 1020),
 (2148630, 'Stephanie', 'Scott', '2020-10-05', 'group1', 'BE', 'NL', '4445 Waterkant', '220', 'Antwerp', '2000', 'Belgium', 1021)
 
-INSERT INTO Soldier_phones (phones, ArmyNumber)
+INSERT INTO Soldier_Phone (phones, ArmyNumber)
 VALUES
 (1234567890, 2171544),  
 (1234567891, 1852276),  
