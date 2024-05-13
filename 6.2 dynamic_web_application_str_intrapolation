@@ -8,27 +8,33 @@ using HtmlTables, HTTP
 ENV["htmltables_dbpath"]=raw"C:\Users\wellens.a\Desktop\information management test5.db" # verwijs hier naar je eigen dbpath, anders zal de code niet werken :)
 
 
-htmlTable("dosimeterassignment")
+requestedArmynumber = parse(Int64,queryParameters[ArmyNumber])
 
+sqlQry = "SELECT
+	s.firstName,
+	s.ArmyNumber
+	s.grou
+	dmr.SerialNumber,
 
-function dosimeterassignment(req::HTTP.Messages.Request)
-    @info "weapon assigned" #input detected
-    sqlQry = "SELECT
-        s.ArmyNumber,
-        dmr.SerialNumber
-        FROM 
-        Soldier s
-            INNER JOIN dosimiterassignment dmr ON s.Armynumber = dmr.SerialNumber
-            WHERE Armynumber = $Soldier
-            ;
-        "
-    "<html>
-    <title>Soldier table </title>
-    <body>
-    $(htmlTableForQuery(sqlQRy))
-    </body>
-    </html>
-    "
+	FROM
+		Soldier s
+			INNER JOIN DosimeterAssignment da ON s.ArmyNumber = da.ArmyNumber
+			INNER JOIN Dosimeter dm ON dm.SerialNumber = da.serialNumber
+	WHERE s.ArmyNumber = $requestedArmyNumber;
+"
+"<html>
+	<head>
+		<style>
+			table, th, td {
+				border: 1px solid black;
+			}
+		</style>
+		<title>hoi, dit is de DosimeterAssignment</title>
+	</head>
+	<body>
+	$(htmlTableForQuery(sqlQry))
+	</body>
+</html>"
 end
 
 
