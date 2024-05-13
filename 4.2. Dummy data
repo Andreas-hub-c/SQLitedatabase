@@ -490,7 +490,7 @@ INSERT INTO dosiMeterAssignement (ArmyNumber, SerialNumber)
 (2214756, 1020),
 (2148630, 1021)
 
-INSERT INTO extSoldier (Surname, IdNumber, firstName)
+INSERT INTO extSoldier (surName, idNumber, firstName)
 VALUES
 ('Smith', 'EXT12345', 'John'),  -- around 10 Surnames and firstnames are also placed into 'INSERT INTO soldier'
 ('Johnson', 'EXT54321', 'Jane'),
@@ -529,7 +529,7 @@ VALUES
 ('Allen', 'EXT660011', 'Elizabeth'),  
 ('Garcia', 'EXT004455', 'Emily')
 	   
-INSERT INTO Soldier (ArmyNumber, FirstName, surName, dateOfBirth, group, nationality, language, street, nr, city, postalCode, Country, SerialNumber) -- we noemen "group" hier (en in sql) "grou" aangazien hij hem anders als functie identificeert
+INSERT INTO Soldier (ArmyNumber, firstName, surName, dateOfBirth, grou, nationality, language, street, nr, city, postalCode, Country, SerialNumber) -- we noemen "group" hier (en in sql) "grou" aangazien hij hem anders als functie identificeert
 VALUES
 (2171544, 'John', 'Doe', '1980-01-01', 'group1', 'US', 'EN, '123 Main St', '10', 'Anytown', '12345', 'USA', 1000),  
 (1852276, 'Sarah', 'Jones', '1985-02-02', 'group1', 'UK', 'EN', '456 Elm St', '20', 'London', 'E1 5BT', 'UK', 1001),   
