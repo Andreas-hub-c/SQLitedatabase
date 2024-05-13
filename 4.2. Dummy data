@@ -467,7 +467,7 @@ VALUES
 ('2025-11-05', '2025-11-01', '2025-11-30', 0.29, 1021)
 
 
-INSERT INTO dosiMeterAssignement (ArmyNumber, SerialNumber)µ
+INSERT INTO dosiMeterAssignement (ArmyNumber, SerialNumber)
 VALUES
 (2171544, 1000),
 (1852276, 1001),
