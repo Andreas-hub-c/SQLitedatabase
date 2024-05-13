@@ -532,7 +532,7 @@ VALUES
 	   
 INSERT INTO Soldier (ArmyNumber, firstName, surName, dateOfBirth, grou, nationality, language, street, nr, city, postalCode, Country, SerialNumber) -- we noemen "group" hier (en in sql) "grou" aangazien hij hem anders als functie identificeert
 VALUES
-(2171544, 'John', 'Doe', '1980-01-01', 'group1', 'US', 'EN, '123 Main St', '10', 'Anytown', '12345', 'USA', 1000),  
+(2171544, 'John', 'Doe', '1980-01-01', 'group1', 'US', 'EN', '123 Main St', '10', 'Anytown', '12345', 'USA', 1000),  
 (1852276, 'Sarah', 'Jones', '1985-02-02', 'group1', 'UK', 'EN', '456 Elm St', '20', 'London', 'E1 5BT', 'UK', 1001),   
 (1963253, 'Michael', 'Garcia', '1990-03-03', 'group1', 'CA', 'EN', '789 Maple Ave', '30', 'Toronto', 'M5H 2N2', 'Canada', 1002),  
 (2252278, 'Mary', 'Brown', '1995-04-04', 'group1', 'AU', 'EN', '1011 Oak Ln', '40', 'Sydney', '2000', 'Australia', 1003), 
