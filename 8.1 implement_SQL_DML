@@ -13,7 +13,12 @@ htmlTable("dosimeterreading")
 htmlTable("extsoldier")
 htmlTable("dosimeterassignment")
 htmlTable("soldier_phones")
-
+htmlTable("5_1")
+htmlTable("5_2")
+htmlTable("5_3")
+htmlTable("5_4")
+htmlTable("5_5")
+htmlTable("5_6")
 
 begin
   const ROUTER = HTTP.Router()
