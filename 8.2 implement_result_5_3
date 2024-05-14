@@ -1,1 +1,99 @@
+begin
+	using Pkg
+	const deps = [pair.second for pair in Pkg.dependencies()]
+	const direct_deps = filter(p -> p.is_direct_dep, deps)
+	const pkgs = [x.name for x in direct_deps]
+	if "HtmlTables" ∉ pkgs
+	    @info "Installing HtmlTables for Julia $(VERSION)..."
+	    Pkg.add(url="https://github.com/vanderpp/HtmlTables.jl/")
+	end
+	if "HTTP" ∉ pkgs
+	    @info "Installing HTTP for Julia $(VERSION)..."
+	    Pkg.add("HTTP")
+	end
+	
+end
 
+using HtmlTables, HTTP
+
+ENV["htmltables_dbpath"]=raw"C:\Users\mille.b\Documents\juliaSC622\4.2_Volledige_Database.db" # verwijs hier naar je eigen dbpath, anders zal de code niet werken :)
+
+
+htmlTable("soldier")
+
+begin
+	const ROUTER = HTTP.Router()
+	
+
+function home(req::HTTP.Messages.Request)
+	 "<html>
+		<head>
+		<title> Dynamic webpage 8.2 </title>
+		</head>
+	
+		<body>
+		<h1>Dynamic webpage 8.2 </h1>
+	
+	 <h2>Op deze pagina kan je een militair opvragen via zijn ArmyNumber.</h2>
+	 <p> A group project of Maelfeyt, Mille, Ulrichts, Vandersmissen, Pelgrims-Rens and Wellens </p>
+  				<form action='/SoldierInfoFiltered'>
+  					<label for='ArmyNumber'>ArmyNumber:</label><br>
+  					<input type='text' id='ArmyNumber' name='ArmyNumber' value=''>                        <br>
+  					<br>
+  					<br>
+  					<input type='submit' value='Get Data'>
+  				</form>     	
+	
+		
+		</body>
+	 </html>"
+	end
+	
+
+	function SoldierInfoFiltered(req::HTTP.Messages.Request)
+
+		targetURI = HTTP.URI(req.target)
+		queryParameters = HTTP.queryparams(targetURI)
+
+		requestedArmyNumber = parse(Int64, queryParameters["ArmyNumber"])
+
+		sqlQry = "SELECT
+					
+					s.firstName,
+					s.surName,
+					s.nationality,
+					s.language
+
+
+				FROM
+					Soldier s					
+				WHERE s.ArmyNumber = $requestedArmyNumber;"
+		
+		"<html>
+			<head>
+			<style>
+				table, th, td {
+					border: 1px solid black;
+				}
+			</style>
+			<title>SOldier5.3Info</title>
+		</head>
+		<body>
+		<a href=/>Return to Homepage</a>
+		$(htmlTableForQuery(sqlQry))
+		</body>
+	</html>"
+	end
+
+	
+		
+		
+HTTP.register!(ROUTER, "GET", "/", home)	
+HTTP.register!(ROUTER, "GET", "/SoldierInfoFiltered", SoldierInfoFiltered)
+	
+end
+
+
+#server = HTTP.serve!(ROUTER, "127.0.0.1", 80)
+
+#close(server)
