@@ -1,3 +1,4 @@
+
 begin
 	using Pkg;
 	Pkg.add(url="https://github.com/vanderpp/HtmlTables.jl/")
@@ -5,20 +6,15 @@ end
 
 using HtmlTables, HTTP
 
-ENV["htmltables_dbpath"]=raw"C:\Users\wellens.a\Desktop\information management test5.db" # verwijs hier naar je eigen dbpath, anders zal de code niet werken :)
+ENV["htmltables_dbpath"]=raw"C:\Users\wellens.a\Desktop\finaldatabase.db" # verwijs hier naar je eigen dbpath, anders zal de code niet werken :)
 
 htmlTable("soldier")
 htmlTable("dosimeter")
 htmlTable("dosimeterreading")
 htmlTable("extsoldier")
-htmlTable("dosimeterassignment")
-htmlTable("soldier_phones")
-htmlTable("5_1")
-htmlTable("5_2")
-htmlTable("5_3")
-htmlTable("5_4")
-htmlTable("5_5")
-htmlTable("5_6")
+htmlTable("dosiMeterAssignement")
+htmlTable("soldier_Phone")
+
 
 begin
   const ROUTER = HTTP.Router()
@@ -35,9 +31,15 @@ begin
           <li><a href=/soldier>Soldier Table</a></li>
           <li><a href=/extsoldier>Extsoldier Table</a></li>
           <li><a href=/dosimeter>Dosimeter Table</a></li>
-          <li><a href=/dosimeterassignment>Dosimeter Assignment Table</a></li>
+          <li><a href=/dosiMeterAssignement>Dosimeter Assignement Table</a></li>
           <li><a href=/dosimeterreading>Dosimeter Reading Table</a></li>
-          <li><a href=/soldier_phones>Soldier Phones Table</a></li>
+          <li><a href=/soldier_Phone>Soldier Phones Table</a></li>
+          <li><a href=/vijfpunteen>vijfpunteen Table</a></li>
+          <li><a href=/vijfpunttwee>vijfpunttwee Table</a></li>
+          <li><a href=/vijfpuntdrie>vijfpuntdrie Table</a></li>
+          <li><a href=/vijfpuntvier>vijfpuntvier Table</a></li>
+          <li><a href=/vijfpuntvijf>vijfpuntvijf Table</a></li>
+          <li><a href=/vijfpuntvijf>vijfpuntvijf Table</a></li>
         </ul>
       </body>
     </html>"
@@ -103,8 +105,8 @@ begin
       </body>
     </html>"
   end
-  function dosimeterassignment(req::HTTP.Messages.Request)
-    dosimeterassignmentTable = htmlTable("dosimeterassignment")
+  function dosiMeterAssignement(req::HTTP.Messages.Request)
+    dosiMeterAssignementTable = htmlTable("dosiMeterAssignement")
     "<html>
         <head>
           <style>
@@ -118,7 +120,7 @@ begin
           <h1> Dosimeter Assignment Table </h1>
           <p> Data from the Dosimeter Assignment table </p>
           <a href=/>Return to Home</a><br>
-          $(dosimeterassignmentTable)
+          $(dosimeterAssigneMentTable)
         </body>
       </html>"
   end
@@ -143,8 +145,8 @@ function dosimeterreading(req::HTTP.Messages.Request)
   </html>"
 end
 
-function soldier_phones(req::HTTP.Messages.Request)
-  soldierphonesTable = htmlTable("soldier_phones")
+function soldier_Phone(req::HTTP.Messages.Request)
+  soldierphonesTable = htmlTable("soldier_Phone")
   "<html>
     <head>
       <style>
@@ -163,8 +165,8 @@ function soldier_phones(req::HTTP.Messages.Request)
   </html>"
 end
 
-function 5_1(req::HTTP.Messages.Request)
-  @info "5_1"
+function vijfpunteen(req::HTTP.Messages.Request)
+  @info "vijfpuntéén"
   sqlQry = "SELECT 
   firstName, 
   surname, 
@@ -180,7 +182,7 @@ function 5_1(req::HTTP.Messages.Request)
 		    		border: 1px solid black;
 		    	}
 		    </style>
-		    <title>hoi, dit is de DosimeterAssignment</title>
+		    <title>hoi, dit is de DosimeterAssignement</title>
     	</head>
     	<body>
       	$(htmlTableForQuery(sqlQry))
@@ -188,8 +190,8 @@ function 5_1(req::HTTP.Messages.Request)
     </html>
 "
 end
-function 5_2(req::HTTP.Messages.Request)
-  @info "5_2"
+function vijfpunttwee(req::HTTP.Messages.Request)
+  @info "vijfpunttwee"
   sqlQry = "SELECT 
   firstName, 
   surName, 
@@ -204,7 +206,7 @@ function 5_2(req::HTTP.Messages.Request)
 		    		border: 1px solid black;
 		    	}
 		    </style>
-		    <title>hoi, dit is de DosimeterAssignment</title>
+		    <title>hoi, dit is de DosimeterAssignement</title>
     	</head>
     	<body>
       	$(htmlTableForQuery(sqlQry))
@@ -212,8 +214,8 @@ function 5_2(req::HTTP.Messages.Request)
     </html>
 "
 end
-function 5_3(req::HTTP.Messages.Request)
-  @info "5_3"
+function vijfpuntdrie(req::HTTP.Messages.Request)
+  @info "vijfpuntdrie"
   sqlQry = "SELECT firstName, 
   surname, 
   nationality, 
@@ -229,7 +231,7 @@ function 5_3(req::HTTP.Messages.Request)
 		    		border: 1px solid black;
 		    	}
 		    </style>
-		    <title>hoi, dit is de DosimeterAssignment</title>
+		    <title>hoi, dit is de DosimeterAssignement</title>
     	</head>
     	<body>
       	$(htmlTableForQuery(sqlQry))
@@ -237,8 +239,8 @@ function 5_3(req::HTTP.Messages.Request)
     </html>
 "
 end
-function 5_4(req::HTTP.Messages.Request)
-  @info "5_4"
+function vijfpuntvier(req::HTTP.Messages.Request)
+  @info "vijfpuntvier"
   sqlQry = "SELECT
   Soldier.ArmyNumber,
   Soldier.firstName,
@@ -257,7 +259,7 @@ function 5_4(req::HTTP.Messages.Request)
 		    		border: 1px solid black;
 		    	}
 		    </style>
-		    <title>hoi, dit is de DosimeterAssignment</title>
+		    <title>hoi, dit is de DosimeterAssignement</title>
     	</head>
     	<body>
       	$(htmlTableForQuery(sqlQry))
@@ -265,21 +267,20 @@ function 5_4(req::HTTP.Messages.Request)
     </html>
 "
 end
-function 5_5(req::HTTP.Messages.Request)
-  @info "5_5"
+function vijfpuntvijf(req::HTTP.Messages.Request)
+  @info "vijfpuntvijf"
   sqlQry = "SELECT s.firstName,
-       s.surName,
-       s.armyNumber,
-       dr.serialNumber,
-       dr.dateReadOut,
-       dr.dateDoseFrom,
-       dr.dateDoseTo,
-       dr.dosemsv
-  FROM Soldier s, DosimeterAssignment da, DosiMeterReading dmr
-  WHERE s.armyNumber = da.armyNumber
-      AND da.serialNumber = dmr.serialNumber
-      AND dmr.dateDoseFrom = "2021-04";    -- geef jaar en maand in bv. 2021-04
-  GROUP BY s.firstName, s.surName, s.ArmyNumber, dm.SerialNumber, dmr.DateReadOut, dmr.DateDoseFrom, dmr.DateDoseTo;
+    s.surName,
+     s.armyNumber,
+          dmr.serialNumber,
+         dmr.dateReadOut,
+         dmr.dateDoseFrom,
+         dmr.dateDoseTo,
+         dmr.dosemv
+            FROM Soldier s, dosiMeterAssignement da, DosiMeterReading dmr
+        WHERE s.armyNumber = da.armyNumber
+        AND da.serialNumber = dmr.serialNumber
+        AND dmr.dateDoseFrom = '2024-04-01';
   "
   "
     <html>
@@ -289,7 +290,7 @@ function 5_5(req::HTTP.Messages.Request)
 		    		border: 1px solid black;
 		    	}
 		    </style>
-		    <title>hoi, dit is de DosimeterAssignment</title>
+		    <title>hoi, dit is de DosimeterAssignement</title>
     	</head>
     	<body>
       	$(htmlTableForQuery(sqlQry))
@@ -297,18 +298,18 @@ function 5_5(req::HTTP.Messages.Request)
     </html>
 "
 end
-function 5_6(req::HTTP.Messages.Request)
-  @info "5_6"
+function vijfpuntzes(req::HTTP.Messages.Request)
+  @info "vijfpuntzes"
   sqlQry = "SELECT s.firstName,
-       s.surName,
-       s.armyNumber,
-       SUM(dr.dosemv) 
-  FROM Soldier s, DosimeterAssignment da, DosiMeterReading dmr
-  WHERE s.armyNumber = da.armyNumber
-      AND da.serialNumber = dmr.serialNumber
-      AND dmr.serialNumber = "1004"  -- geef hier het serienummer voor de dosimeterreading in 
-      AND dmr.dateDoseFrom BETWEEN "2025-01-01" AND "2025-12-31"  -- geef hier de data in waartussen het moet liggen (1jaar)
-  GROUP BY s.firstName, s.surName, s.armyNumber;
+  s.surName,
+  s.armyNumber,
+  SUM(dmr.dosemv) AS jaarlijksStraling
+FROM Soldier s, dosiMeterAssignement da, DosiMeterReading dmr
+WHERE s.armyNumber = da.armyNumber
+AND da.serialNumber = dmr.serialNumber
+AND dmr.serialNumber = '1000' 
+AND dmr.dateDoseFrom BETWEEN '2024-01-01' AND '2024-12-31'
+GROUP BY s.firstName, s.surName, s.armyNumber;
   "
   "
     <html>
@@ -318,7 +319,7 @@ function 5_6(req::HTTP.Messages.Request)
 		    		border: 1px solid black;
 		    	}
 		    </style>
-		    <title>hoi, dit is de DosimeterAssignment</title>
+		    <title>hoi, dit is de DosiMeterAssignement</title>
     	</head>
     	<body>
       	$(htmlTableForQuery(sqlQry))
@@ -331,15 +332,15 @@ end
 HTTP.register!(ROUTER, "GET", "/soldier", soldier)
 HTTP.register!(ROUTER, "GET", "/extsoldier", extsoldier)
 HTTP.register!(ROUTER, "GET", "/dosimeter", dosimeter)
-HTTP.register!(ROUTER, "GET", "/dosimeterassignment", dosimeterassignment)
+HTTP.register!(ROUTER, "GET", "/dosiMeterAssignement", dosiMeterAssignement)
 HTTP.register!(ROUTER, "GET", "/dosimeterreading", dosimeterreading)
-HTTP.register!(ROUTER, "GET", "/soldier_phones", soldier_phones)
-HTTP.register!(ROUTER, "GET", "/5_1", 5_1)
-HTTP.register!(ROUTER, "GET", "/5_2", 5_2)
-HTTP.register!(ROUTER, "GET", "/5_3", 5_3)
-HTTP.register!(ROUTER, "GET", "/5_4", 5_4)
-HTTP.register!(ROUTER, "GET", "/5_5", 5_5)
-HTTP.register!(ROUTER, "GET", "/5_6", 5_6)
+HTTP.register!(ROUTER, "GET", "/soldier_Phone", soldier_Phone)
+HTTP.register!(ROUTER, "GET", "/vijfpunteen", vijfpunteen)
+HTTP.register!(ROUTER, "GET", "/vijfpunttwee", vijfpunttwee)
+HTTP.register!(ROUTER, "GET", "/vijfpuntdrie", vijfpuntdrie)
+HTTP.register!(ROUTER, "GET", "/vijfpuntvier", vijfpuntvier)
+HTTP.register!(ROUTER, "GET", "/vijfpuntvijf", vijfpuntvijf)
+HTTP.register!(ROUTER, "GET", "/vijfpuntzes", vijfpuntzes)
 HTTP.register!(ROUTER, "GET", "/", home)
 end
 
