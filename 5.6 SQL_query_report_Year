@@ -1,11 +1,10 @@
 SELECT s.firstName,
        s.surName,
        s.armyNumber,
-       SUM(dr.dosemv) AS YearlyDosimeterReading
-FROM Soldier s, DosimeterAssignment da, DosiMeterReading dmr
+       SUM(dmr.dosemv) AS jaarlijksStraling
+FROM Soldier s, dosiMeterAssignement da, DosiMeterReading dmr
 WHERE s.armyNumber = da.armyNumber
   AND da.serialNumber = dmr.serialNumber
-  AND dmr.serialNumber = "<serialnr_dmr>"  -- geef hier het serienummer voor de dosimeterreading in 
-  AND dmr.dateDoseFrom BETWEEN "2023-01-01" AND "2023-12-31"  -- geef hier de data in waartussen het moet liggen (1jaar)
+  AND dmr.serialNumber = "1000" 
+  AND dmr.dateDoseFrom BETWEEN "2024-01-01" AND "2024-12-31" 
 GROUP BY s.firstName, s.surName, s.armyNumber;
-
