@@ -1,13 +1,12 @@
 SELECT s.firstName,
        s.surName,
        s.armyNumber,
-       dr.serialNumber,
-       dr.dateReadOut,
-       dr.dateDoseFrom,
-       dr.dateDoseTo,
-       dr.dosemv
-FROM Soldier s, DosimeterAssignment da, DosiMeterReading dmr
+       dmr.serialNumber,
+       dmr.dateReadOut,
+       dmr.dateDoseFrom,
+       dmr.dateDoseTo,
+       dmr.dosemv
+FROM Soldier s, dosiMeterAssignement da, DosiMeterReading dmr
 WHERE s.armyNumber = da.armyNumber
   AND da.serialNumber = dmr.serialNumber
-  AND dmr.dateDoseFrom = "<YEAR-MONTH>";    -- geef jaar en maand in bv. 2021-04
-GROUP BY s.firstName, s.surName, s.ArmyNumber, dm.SerialNumber, dmr.DateReadOut, dmr.DateDoseFrom, dmr.DateDoseTo;
+  AND dmr.dateDoseFrom = "<YEAR-MONTH-01>";    -- geef jaar en maand in bv. 2024-04-01, houd 01 bij 
