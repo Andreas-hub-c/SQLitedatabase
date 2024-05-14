@@ -11,8 +11,8 @@ htmlTable("soldier")
 htmlTable("dosimeter")
 htmlTable("dosimeterreading")
 htmlTable("extsoldier")
-htmlTable("dosimeterassignment")
-htmlTable("soldier_phones")
+htmlTable("dosiMeterAssignement")
+htmlTable("Soldier_Phone")
 
 
 begin
