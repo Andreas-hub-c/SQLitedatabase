@@ -1,0 +1,190 @@
+begin
+	using Pkg
+	const deps = [pair.second for pair in Pkg.dependencies()]
+	const direct_deps = filter(p -> p.is_direct_dep, deps)
+	const pkgs = [x.name for x in direct_deps]
+	if "HtmlTables" ∉ pkgs
+	    @info "Installing HtmlTables for Julia $(VERSION)..."
+	    Pkg.add(url="https://github.com/vanderpp/HtmlTables.jl/")
+	end
+	if "HTTP" ∉ pkgs
+	    @info "Installing HTTP for Julia $(VERSION)..."
+	    Pkg.add("HTTP")
+	end
+	
+end
+
+using HtmlTables, HTTP
+
+begin
+	using SQLite
+	SqlStatement = "SELECT * FROM Soldier"
+	databaseFile = "weaponshop2324_SOURCE.db"
+	databaseConnection = SQLite.DB(databaseFile)
+	SqlResult = DBInterface.execute(databaseConnection, SqlStatement);
+end
+
+
+begin
+	using DataFrames
+	df =  DataFrame(SqlResult)
+end
+
+
+ENV["htmltables_dbpath"]=raw"C:\Users\mille.b\Documents\juliaSC622\weaponshop2324_SOURCE.db"
+
+begin
+	const ROUTER = HTTP.Router()
+	
+	function home(req::HTTP.Messages.Request)
+	"<html>
+		<head>
+		<title> Volledige website deel 3</title>
+		</head>
+	
+		<body>
+		<h1>Volledige Website</h1>
+		<p> A group project of Maelfeyt, Mille, Ulrichts, Vandersmissen, Pelgrims-Rens and Wellens </p>
+		
+	
+		<a href=/3.1.1>3.1.1</a>
+		<br>
+		<br>
+		<a href=/3.1.2>3.1.2</a>
+		<br>
+		<br>
+		<a href=/3.2>3.2</a>
+		<br>
+		<br>
+		<a href=/3.3>3.3</a>
+		<br>
+		<br>
+		<a href=/3.4>3.4</a>
+		
+	
+		</body>
+	 </html>"
+	end
+	function threedotonedotone(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+			<title> 3.1.1</title>
+			</head>
+
+			<body>
+			<h1> Welkom op 3.1.1 </h1>
+			<p> 3.1.1 </p> 
+			<a href=/>Return to Homepage</a>
+			</body>
+		</html>"
+	end
+	
+	function threedotonedottwo(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+			<title>3.1.2</title>
+			</head>
+
+			<body>
+			<h1> Welkom op 3.1.2 </h1>
+			<p> 3.1.2 </p>
+			<a href=/>Return to Homepage</a>
+			</body>
+		</html>"
+	end
+	function threedottwo(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+				<title> 3.2 </title>
+
+			<style>
+				table, td, th{
+				border:1px solid black;
+				}
+			</style>
+			</head>
+
+			<body>
+				<h1> Welcome to 3.2 </h1>
+				<p> 3.2 </p>
+				<a href=/>Return to Homepage</a>
+				<br>
+				<br>
+			<table>
+				<tr><th>title1</th><th>title2</th><th>title3</th><th>title4</th></tr>
+				<tr><td>data11</td><td>data21</td><td>data31</td><td>data41</td></tr>
+				<tr><td>data12</td><td>data22</td><td>data32</td><td>data42</td></tr>
+				<tr><td>data13</td><td>data23</td><td>data33</td><td>data43</td></tr>
+				<tr><td>data14</td><td>data24</td><td>data34</td><td>data44</td></tr>
+			</table>
+			</body>
+		</html>"
+	end
+
+	function threedotthree(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+			<style>
+				table, th, td {
+					border: 1px solid black;
+				}
+				</style>
+			<title> 3.3 </title>
+			</head>
+
+			<body>
+			<h1> Welcome to 3.3 </h1>
+			<p> 3.3 </p>
+			<a href=/>Return to Homepage</a>
+
+			$(htmlTable("Soldier"))
+			
+			
+			</body>
+		</html>"
+	end
+	
+
+	function threedotfour(req::HTTP.Messages.Request)
+			
+		"<html>
+			<head>
+			<style>
+				table, th, td {
+					border: 1px solid black;
+				}
+				</style>
+			<title> 3.4 </title>
+			</head>
+
+			<body>
+			<h1> Welcome to 3.4 </h1>
+			<p> 3.4 </p>
+			<a href=/>Return to Homepage</a>
+			<table>
+
+			$(htmlTableForQuery("SELECT * FROM Soldier"))
+		
+			</table>
+		
+			</body>
+		</html>"
+		
+	end
+	
+
+
+
+
+
+		HTTP.register!(ROUTER, "GET","/3.4", threedotfour)
+		HTTP.register!(ROUTER, "GET", "/3.3", threedotthree)
+		HTTP.register!(ROUTER, "GET", "/3.2", threedottwo)
+		HTTP.register!(ROUTER, "GET", "/3.1.2", threedotonedottwo)
+		HTTP.register!(ROUTER, "GET", "/3.1.1", threedotonedotone)
+		HTTP.register!(ROUTER, "GET", "/" , home)
+end
+
+server = HTTP.serve!(ROUTER, "127.0.0.1", 80)
+
+#close(server)
