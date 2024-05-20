@@ -88,3 +88,6 @@ HTTP.register!(ROUTER, "GET", "/DosiMeterReadingFilterInput" , DosiMeterReadingF
 
 
 end
+
+server = HTTP.serve!(ROUTER, "127.0.0.1", 80)
+#close(server)
