@@ -27,6 +27,27 @@ begin
 			</body>
 		</html>"
 	end
+	function DosimeterAssignment(req::HTTP.Messages.Request)
+		@info "DosimeterAssignment Called"
+		sqlQry = "SELECT
+					
+				
+				;"
+		"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>weaponAssignment</title>
+			</head>
+			<body>
+			$(htmlTableForQuery(sqlQry))
+			</body>
+		</html>"
+	end
+
 	
 	function DosimeterAssignmentFiltered(req::HTTP.Messages.Request)
 		@info "SoldierFiltered Called"
@@ -46,7 +67,7 @@ begin
 		Soldier s
 			INNER JOIN DosimeterAssignment da ON s.ArmyNumber = da.ArmyNumber
 			INNER JOIN Dosimeter dm ON dm.SerialNumber = da.serialNumber
-	WHERE s.ArmyNumber = $requestedArmyNumber;
+	WHERE s.ArmyNumber = $requestedArmyNumber
 				;"
 		"<html>
 			<head>
