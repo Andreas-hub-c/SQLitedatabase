@@ -5,59 +5,87 @@ end
 
 using HtmlTables, HTTP
 
-ENV["htmltables_dbpath"]=raw"C:\Users\wellens.a\Desktop\information management test5.db" # verwijs hier naar je eigen dbpath, anders zal de code niet werken :)
-<html>
-	<head>
-		<title>Soldier Filter Input</title>
-	</head>
-	<body>
-		<h1>On this page you can ask the information for a specific soldier.</h1>
-		<form action='SoldierFiltered'>
-			<label for='ArmyNumber'>ArmyNumber:</label><br>
-			<input type='text' id='ArmyNumber' name='ArmyNumber' value=''><br>
-			<br>
-			<br>
-			<input type='submit' value='Get Soldier'>
-		</form>
-	</body>
-</html>
+ENV["htmltables_dbpath"]=raw"C:\Users\Ulrichts.T\Documents\kms\1ste bach_2023-2024\SSMW sem 2\SC622_Information management\Groepswerk\Echte opdracht\eindproduct.db"
 
-requestedArmyNumber = parse(Int64,queryParameters[ArmyNumber])
+begin
+	const ROUTER = HTTP.Router()
 
-sqlQry = "SELECT
+	function home(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>Wais home</title>
+			</head>
+			<body>
+			<h1> Dosimeter assingment filtered input </h1>
+			<p>view the dosimeter assignment for a specific soldier</p>
+			<a href='/DosimeterAssignmentFilterInput'>Filtered Request from an armyNumber</a>
+			</body>
+		</html>"
+	end
+	
+	function DosimeterAssignmentFiltered(req::HTTP.Messages.Request)
+		@info "SoldierFiltered Called"
+
+    	targetURI = HTTP.URI(req.target)
+    	queryParameters = HTTP.queryparams(targetURI)
+    
+    	requestedArmyNumber = parse(Int64,queryParameters["ArmyNumber"])
+		
+		sqlQry = "SELECT
 	s.firstName,
 	s.ArmyNumber
 	s.grou
-	dmr.SerialNumber,
+	dm.SerialNumber,
 
 	FROM
 		Soldier s
 			INNER JOIN DosimeterAssignment da ON s.ArmyNumber = da.ArmyNumber
 			INNER JOIN Dosimeter dm ON dm.SerialNumber = da.serialNumber
 	WHERE s.ArmyNumber = $requestedArmyNumber;
-"
+				;"
+		"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>Dosimeterassignment</title>
+			</head>
+			<body>
+			$(htmlTableForQuery(sqlQry))
+			</body>
+		</html>"
+	end
+	
+	function DosimeterAssignmentFilterInput(req::HTTP.Messages.Request)
 "<html>
 	<head>
-		<style>
-			table, th, td {
-				border: 1px solid black;
-			}
-		</style>
-		<title>hoi, dit is de DosimeterAssignment</title>
+		<title>Dosimeter Assignment Filter Input</title>
 	</head>
 	<body>
-	$(htmlTableForQuery(sqlQry))
+		<h1>On this page you can ask the dosimeterassignment for a specific soldier.</h1>
+		<form action='/DosimeterAssignmentFiltered'>
+			<label for='ArmyNumber'>ArmyNumber:</label><br>
+			<input type='text' id='ArmyNumber' name='ArmyNumber' value=''><br>
+			<br>
+			<br>
+			<input type='submit' value='Get Assignment'>
+		</form>
 	</body>
 </html>"
+	end
+HTTP.register!(ROUTER, "GET", "/" , home)
+HTTP.register!(ROUTER, "GET", "/DosimeterAssignmentFilterInput" , DosimeterAssignmentFilterInput)
+HTTP.register!(ROUTER, "GET", "/DosimeterAssignmentFiltered" , DosimeterAssignmentFiltered)
+
+
 end
+server = HTTP.serve!(ROUTER, "127.0.0.1", 80)
+#close(server)
 
-
-HTTP.register!(ROUTER, "GET", "/dosimeterassignment", dosimeterassignment)
-
-
-
-#server = HTTP.serve!(ROUTER, "127.0.0.1", 80)
-
-close(server)
-
-          
