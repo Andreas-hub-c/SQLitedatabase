@@ -6,7 +6,6 @@ end
 using HtmlTables, HTTP
 
 ENV["htmltables_dbpath"]=raw"C:\Users\Ulrichts.T\Documents\kms\1ste bach_2023-2024\SSMW sem 2\SC622_Information management\Groepswerk\Echte opdracht\eindproduct.db"
-
 begin
 	const ROUTER = HTTP.Router()
 
@@ -18,56 +17,35 @@ begin
 	                    border: 1px solid black;
 	                }
 	            </style>
-				<title>Wais home</title>
+				<title>6.2 home</title>
 			</head>
 			<body>
-			<h1> Dosimeter assingment filtered input </h1>
-			<p>view the dosimeter assignment for a specific soldier</p>
-			<a href='/DosimeterAssignmentFilterInput'>Filtered Request from an armyNumber</a>
-			</body>
-		</html>"
-	end
-	function DosimeterAssignment(req::HTTP.Messages.Request)
-		@info "DosimeterAssignment Called"
-		sqlQry = "SELECT
-					
-				
-				;"
-		"<html>
-			<head>
-	            <style>
-	                table, th, td {
-	                    border: 1px solid black;
-	                }
-	            </style>
-				<title>weaponAssignment</title>
-			</head>
-			<body>
-			$(htmlTableForQuery(sqlQry))
+			<h1> dosimeter assingment filtered input </h1>
+			<p>view the dosimeter assignement for a specific soldier</p>
+			<a href='/dosimeterAssignementFilterInput'>Filtered Request from an Armynr</a>
 			</body>
 		</html>"
 	end
 
 	
-	function DosimeterAssignmentFiltered(req::HTTP.Messages.Request)
-		@info "SoldierFiltered Called"
+	function dosimeterAssignementFiltered(req::HTTP.Messages.Request)
+		@info "dosimeterAssignementFiltered Called"
 
     	targetURI = HTTP.URI(req.target)
     	queryParameters = HTTP.queryparams(targetURI)
     
-    	requestedArmyNumber = parse(Int64,queryParameters["ArmyNumber"])
+    	requestedArmynr = parse(Int64,queryParameters["ArmyNumber"])
 		
 		sqlQry = "SELECT
-	s.firstName,
-	s.ArmyNumber
-	s.grou
-	dm.SerialNumber,
-
-	FROM
-		Soldier s
-			INNER JOIN DosimeterAssignment da ON s.ArmyNumber = da.ArmyNumber
-			INNER JOIN Dosimeter dm ON dm.SerialNumber = da.serialNumber
-	WHERE s.ArmyNumber = $requestedArmyNumber
+					s.firstName,
+					s.ArmyNumber,
+					s.grou,
+					dm.SerialNumber
+				FROM
+					Soldier s
+						INNER JOIN dosimeterAssignement da  ON s.ArmyNumber = 	da.ArmyNumber
+						INNER JOIN dosimeter dm            ON dm.SerialNumber = da.SerialNumber
+				WHERE s.ArmyNumber = $requestedArmynr
 				;"
 		"<html>
 			<head>
@@ -76,7 +54,7 @@ begin
 	                    border: 1px solid black;
 	                }
 	            </style>
-				<title>Dosimeterassignment</title>
+				<title>dosimeterAssignement</title>
 			</head>
 			<body>
 			$(htmlTableForQuery(sqlQry))
@@ -84,26 +62,27 @@ begin
 		</html>"
 	end
 	
-	function DosimeterAssignmentFilterInput(req::HTTP.Messages.Request)
+	function dosimeterAssignementFilterInput(req::HTTP.Messages.Request)
 "<html>
 	<head>
-		<title>Dosimeter Assignment Filter Input</title>
+		<title>dosimeter Assignement Filter Input</title>
 	</head>
 	<body>
-		<h1>On this page you can ask the dosimeterassignment for a specific soldier.</h1>
-		<form action='/DosimeterAssignmentFiltered'>
+		<h1>On this page you can ask the dosimeterassigenment for a specific soldier.</h1>
+		<form action='/dosimeterAssignementFiltered'>
 			<label for='ArmyNumber'>ArmyNumber:</label><br>
 			<input type='text' id='ArmyNumber' name='ArmyNumber' value=''><br>
 			<br>
 			<br>
-			<input type='submit' value='Get Assignment'>
+			<input type='submit' value='Get Assignement'>
 		</form>
 	</body>
 </html>"
 	end
 HTTP.register!(ROUTER, "GET", "/" , home)
-HTTP.register!(ROUTER, "GET", "/DosimeterAssignmentFilterInput" , DosimeterAssignmentFilterInput)
-HTTP.register!(ROUTER, "GET", "/DosimeterAssignmentFiltered" , DosimeterAssignmentFiltered)
+HTTP.register!(ROUTER, "GET", "/dosimeterAssignementFiltered" , dosimeterAssignementFiltered)
+HTTP.register!(ROUTER, "GET", "/dosimeterAssignementFilterInput" , dosimeterAssignementFilterInput)
+
 
 
 end
