@@ -33,18 +33,26 @@ function DosiMeterReadingFiltered(req::HTTP.Messages.Request)
     	targetURI = HTTP.URI(req.target)
     	queryParameters = HTTP.queryparams(targetURI)
     
-    	requestedArmynr = parse(Int64,queryParameters["ArmyNumber"])
+    	dateDoseFrom = queryParameters["dateDoseFrom"]
+		dateDoseTo = queryParameters["dateDoseTo"]
 		
-		sqlQry = "SELECT
-					s.firstName,
-					s.ArmyNumber,
-					s.grou,
-					dm.SerialNumber
-				FROM
-					Soldier s
-						INNER JOIN dosimeterAssignement da  ON s.ArmyNumber = 	da.ArmyNumber
-						INNER JOIN dosimeter dm            ON dm.SerialNumber = da.SerialNumber
-				WHERE s.ArmyNumber = $requestedArmynr
+		sqlQry = "SELECT 
+						s.firstName,
+       					s.surName,
+       					s.ArmyNumber,
+       					dmr.SerialNumber,
+       					dmr.dateReadOut,
+       					dmr.dateDoseFrom,
+       					dmr.dateDoseTo,
+       					dmr.dosemv
+		
+				FROM 
+					Soldier s, dosiMeterAssignement da, DosiMeterReading dmr
+						INNER JOIN DosimeterAssignement da ON dmr.SerialNumber = da.SerialNumber
+						INNER JOIN Soldier s ON da.ArmyNumber = s.ArmyNumber
+				WHERE dmr.dateReadOut >= $dateDoseFrom 
+						AND dmr.dateReadOut <= $dateDoseTo
+  								
 				;"
 		"<html>
 			<head>
@@ -69,11 +77,11 @@ function DosiMeterReadingFiltered(req::HTTP.Messages.Request)
 	<body>
 		<h1>On this page you can ask the dose from all soldiers between a certain period</h1>
 		<form action='/DosiMeterReadingFiltered'>
-			<label for='dataDoseFrom'>dataDoseFrom:</label><br>
-			<input type='date' id='dataDoseFrom' name='dataDoseFrom' value=''><br>
+			<label for='dateDoseFrom'>dateDoseFrom:</label><br>
+			<input type='date' id='dateDoseFrom' name='dateDoseFrom' value=''><br>
 
-      <label for='dataDoseTo'>dataDoseTo:</label><br>
-			<input type='date' id='dataDoseTo' name='dataDoseTo' value=''>
+      <label for='dateDoseTo'>dateDoseTo:</label><br>
+			<input type='date' id='dateDoseTo' name='dateDoseTo' value=''>
 			<br>
 			<br>
 			<input type='submit' value='Get Soldiers'>
