@@ -1,1 +1,90 @@
+begin
+	using Pkg;
+	Pkg.add(url="https://github.com/vanderpp/HtmlTables.jl/")
+end
 
+using HtmlTables, HTTP
+
+ENV["htmltables_dbpath"]=raw"C:\Users\Ulrichts.T\Documents\kms\1ste bach_2023-2024\SSMW sem 2\SC622_Information management\Groepswerk\Echte opdracht\eindproduct.db"
+begin
+	const ROUTER = HTTP.Router()
+
+	function home(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>8.3 home</title>
+			</head>
+			<body>
+			<h1> Data picker soldiers </h1>
+			<p>view the soldiers dosis from one date till another date </p>
+			<a href='/DosiMeterReadingFilterInput'>Filtered Request from a date to a date</a>
+			</body>
+		</html>"
+	end
+
+function DosiMeterReadingFiltered(req::HTTP.Messages.Request)
+		@info "DosiMeterReadingFiltered Called"
+
+    	targetURI = HTTP.URI(req.target)
+    	queryParameters = HTTP.queryparams(targetURI)
+    
+    	requestedArmynr = parse(Int64,queryParameters["ArmyNumber"])
+		
+		sqlQry = "SELECT
+					s.firstName,
+					s.ArmyNumber,
+					s.grou,
+					dm.SerialNumber
+				FROM
+					Soldier s
+						INNER JOIN dosimeterAssignement da  ON s.ArmyNumber = 	da.ArmyNumber
+						INNER JOIN dosimeter dm            ON dm.SerialNumber = da.SerialNumber
+				WHERE s.ArmyNumber = $requestedArmynr
+				;"
+		"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>dosimeterAssignement</title>
+			</head>
+			<body>
+			$(htmlTableForQuery(sqlQry))
+			</body>
+		</html>"
+	end
+	
+	function DosiMeterReadingFilterInput(req::HTTP.Messages.Request)
+"<html>
+	<head>
+		<title>DosiMeterReadingFilter Input</title>
+	</head>
+	<body>
+		<h1>On this page you can ask the dose from all soldiers between a certain period</h1>
+		<form action='/DosiMeterReadingFiltered'>
+			<label for='dataDoseFrom'>dataDoseFrom:</label><br>
+			<input type='date' id='dataDoseFrom' name='dataDoseFrom' value=''><br>
+
+      <label for='dataDoseTo'>dataDoseTo:</label><br>
+			<input type='date' id='dataDoseTo' name='dataDoseTo' value=''>
+			<br>
+			<br>
+			<input type='submit' value='Get Soldiers'>
+		</form>
+	</body>
+</html>"
+	end
+HTTP.register!(ROUTER, "GET", "/" , home)
+HTTP.register!(ROUTER, "GET", "/DosiMeterReadingFiltered" , DosiMeterReadingFiltered)
+HTTP.register!(ROUTER, "GET", "/DosiMeterReadingFilterInput" , DosiMeterReadingFilterInput)
+
+
+
+end
