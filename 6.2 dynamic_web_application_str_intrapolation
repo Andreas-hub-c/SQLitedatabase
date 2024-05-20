@@ -6,9 +6,23 @@ end
 using HtmlTables, HTTP
 
 ENV["htmltables_dbpath"]=raw"C:\Users\wellens.a\Desktop\information management test5.db" # verwijs hier naar je eigen dbpath, anders zal de code niet werken :)
+<html>
+	<head>
+		<title>Soldier Filter Input</title>
+	</head>
+	<body>
+		<h1>On this page you can ask the information for a specific soldier.</h1>
+		<form action='SoldierFiltered'>
+			<label for='ArmyNumber'>ArmyNumber:</label><br>
+			<input type='text' id='ArmyNumber' name='ArmyNumber' value=''><br>
+			<br>
+			<br>
+			<input type='submit' value='Get Soldier'>
+		</form>
+	</body>
+</html>
 
-
-requestedArmynumber = parse(Int64,queryParameters[ArmyNumber])
+requestedArmyNumber = parse(Int64,queryParameters[ArmyNumber])
 
 sqlQry = "SELECT
 	s.firstName,
