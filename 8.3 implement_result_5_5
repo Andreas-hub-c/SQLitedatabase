@@ -50,8 +50,8 @@ function DosiMeterReadingFiltered(req::HTTP.Messages.Request)
 					Soldier s
 						INNER JOIN dosiMeterAssignement da ON s.ArmyNumber = da.ArmyNumber
 						INNER JOIN DosiMeterReading dmr ON da.SerialNumber = dmr.SerialNumber
-					Where dateDoseFrom ='$RequesteddateDoseFrom'
-					AND dateDoseTo ='$RequesteddateDoseTo'
+					Where dateDoseFrom >= '$RequesteddateDoseFrom'
+					AND dateDoseTo <= '$RequesteddateDoseTo'
   								
 				;"
 		"<html>
