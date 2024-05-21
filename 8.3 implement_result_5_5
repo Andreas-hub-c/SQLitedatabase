@@ -33,8 +33,8 @@ function DosiMeterReadingFiltered(req::HTTP.Messages.Request)
     	targetURI = HTTP.URI(req.target)
     	queryParameters = HTTP.queryparams(targetURI)
     
-    	dateDoseFrom = queryParameters["dateDoseFrom"]
-		dateDoseTo = queryParameters["dateDoseTo"]
+    RequesteddateDoseFrom = queryParameters["dateDoseFrom"]
+	RequesteddateDoseTo = queryParameters["dateDoseTo"]
 		
 		sqlQry = "SELECT 
 						s.firstName,
@@ -47,11 +47,11 @@ function DosiMeterReadingFiltered(req::HTTP.Messages.Request)
        					dmr.dosemv
 		
 				FROM 
-					Soldier s, dosiMeterAssignement da, DosiMeterReading dmr
-						INNER JOIN DosimeterAssignement da ON dmr.SerialNumber = da.SerialNumber
-						INNER JOIN Soldier s ON da.ArmyNumber = s.ArmyNumber
-				WHERE dmr.dateReadOut >= $dateDoseFrom 
-						AND dmr.dateReadOut <= $dateDoseTo
+					Soldier s
+						INNER JOIN dosiMeterAssignement da ON s.ArmyNumber = da.ArmyNumber
+						INNER JOIN DosiMeterReading dmr ON da.SerialNumber = dmr.SerialNumber
+					Where dateDoseFrom ='$RequesteddateDoseFrom'
+					AND dateDoseTo ='$RequesteddateDoseTo'
   								
 				;"
 		"<html>
@@ -96,6 +96,5 @@ HTTP.register!(ROUTER, "GET", "/DosiMeterReadingFilterInput" , DosiMeterReadingF
 
 
 end
-
 server = HTTP.serve!(ROUTER, "127.0.0.1", 80)
 #close(server)
