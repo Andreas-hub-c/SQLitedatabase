@@ -1,0 +1,130 @@
+begin
+	using Pkg
+	const deps = [pair.second for pair in Pkg.dependencies()]
+	const direct_deps = filter(p -> p.is_direct_dep, deps)
+	const pkgs = [x.name for x in direct_deps]
+	if "HtmlTables" ∉ pkgs
+	    @info "Installing HtmlTables for Julia $(VERSION)..."
+	    Pkg.add(url="https://github.com/vanderpp/HtmlTables.jl/")
+	end
+	if "HTTP" ∉ pkgs
+	    @info "Installing HTTP for Julia $(VERSION)..."
+	    Pkg.add("HTTP")
+	end
+	
+end
+
+using HtmlTables, HTTP
+ENV["htmltables_dbpath"]=raw"C:\Users\Ulrichts.T\Documents\kms\1ste bach_2023-2024\SSMW sem 2\SC622_Information management\Groepswerk\Echte opdracht\eindproduct.db"
+begin
+	const ROUTER = HTTP.Router()
+
+	function home(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>Volledige website</title>
+			</head>
+			<body>
+			<h1>Volledige website</h1>
+			<p>Hier zijn alle puntjes mooi samengevat</p>
+			<li><a href='/8.3'>8.3</a>
+			</body>
+		</html>"
+	end
+function 8.3(req::HTTP.Messages.Request)
+"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>8.3 home</title>
+			</head>
+			<body>
+			<h1> Data picker soldiers </h1>
+			<p>view the soldiers dosis from one date till another date </p>
+			<a href='/DosiMeterReadingFilterInput'>Filtered Request from a date to a date</a>
+			</body>
+		</html>"
+	end
+
+function DosiMeterReadingFiltered(req::HTTP.Messages.Request)
+		@info "DosiMeterReadingFiltered Called"
+
+    	targetURI = HTTP.URI(req.target)
+    	queryParameters = HTTP.queryparams(targetURI)
+    
+    RequesteddateDoseFrom = queryParameters["dateDoseFrom"]
+	RequesteddateDoseTo = queryParameters["dateDoseTo"]
+		
+		sqlQry = "SELECT 
+						s.firstName,
+       					s.surName,
+       					s.ArmyNumber,
+       					dmr.SerialNumber,
+       					dmr.dateReadOut,
+       					dmr.dateDoseFrom,
+       					dmr.dateDoseTo,
+       					dmr.dosemv
+		
+				FROM 
+					Soldier s
+						INNER JOIN dosiMeterAssignement da ON s.ArmyNumber = da.ArmyNumber
+						INNER JOIN DosiMeterReading dmr ON da.SerialNumber = dmr.SerialNumber
+					Where dateDoseFrom >= '$RequesteddateDoseFrom'
+					AND dateDoseTo <= '$RequesteddateDoseTo'
+  								
+				;"
+		"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>dosimeterAssignement</title>
+			</head>
+			<body>
+			$(htmlTableForQuery(sqlQry))
+			</body>
+		</html>"
+	end
+	
+	function DosiMeterReadingFilterInput(req::HTTP.Messages.Request)
+"<html>
+	<head>
+		<title>DosiMeterReadingFilter Input</title>
+	</head>
+	<body>
+		<h1>On this page you can ask the dose from all soldiers between a certain period</h1>
+		<form action='/DosiMeterReadingFiltered'>
+			<label for='dateDoseFrom'>dateDoseFrom:</label><br>
+			<input type='date' id='dateDoseFrom' name='dateDoseFrom' value=''><br>
+
+      <label for='dateDoseTo'>dateDoseTo:</label><br>
+			<input type='date' id='dateDoseTo' name='dateDoseTo' value=''>
+			<br>
+			<br>
+			<input type='submit' value='Get Soldiers'>
+		</form>
+	</body>
+</html>"
+	end
+
+	end
+HTTP.register!(ROUTER, "GET", "/" , home)
+HTTP.register!(ROUTER, "GET", "/", 8.3)
+HTTP.register!(ROUTER, "GET", "/DosiMeterReadingFiltered" , DosiMeterReadingFiltered)
+HTTP.register!(ROUTER, "GET", "/DosiMeterReadingFilterInput" , DosiMeterReadingFilterInput)
+
+
+
+end
+server = HTTP.serve!(ROUTER, "127.0.0.1", 80)
+#close(server)
