@@ -1,1 +1,101 @@
+begin
+	using Pkg;
+	Pkg.add(url="https://github.com/vanderpp/HtmlTables.jl/")
+end
 
+using HtmlTables, HTTP
+
+ENV["htmltables_dbpath"]=raw"C:\Users\Ulrichts.T\Documents\kms\1ste bach_2023-2024\SSMW sem 2\SC622_Information management\Groepswerk\Echte opdracht\eindproduct.db"
+begin
+	const ROUTER = HTTP.Router()
+
+	function home(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>6.2 home</title>
+			</head>
+			<body>
+			<h1> Soldier filtered input </h1>
+			<p>view the attributes for a specific soldier</p>
+			<a href='/SoldierFilterInput'>Filtered Request from an Armynr</a>
+			</body>
+		</html>"
+	end
+
+	
+	function SoldierFiltered(req::HTTP.Messages.Request)
+		@info "dosimeterAssignementFiltered Called"
+
+    	targetURI = HTTP.URI(req.target)
+    	queryParameters = HTTP.queryparams(targetURI)
+    
+    	requestedArmynr = parse(Int64,queryParameters["ArmyNumber"])
+		
+		sqlQry = "SELECT
+					s.ArmyNumber,
+					s.firstName,
+					s.surName,
+					s.dateOfBirth,
+					s.grou,
+					s.nationality,
+					s.language,
+					s.street,
+					s.nr,
+					s.city,
+					s.postalCode,
+					s.Country,
+					sp.phones
+					
+				FROM
+					Soldier s
+						INNER JOIN Soldier_Phone sp ON s.ArmyNumber = sp.ArmyNumber
+				WHERE s.ArmyNumber = $requestedArmynr
+				;"
+		"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>Soldier information</title>
+			</head>
+			<body>
+			$(htmlTableForQuery(sqlQry))
+			</body>
+		</html>"
+	end
+	
+	function SoldierFilterInput(req::HTTP.Messages.Request)
+"<html>
+	<head>
+		<title>Soldier Filter Input</title>
+	</head>
+	<body>
+		<h1>On this page you can ask the attributes for a specific soldier.</h1>
+		<form action='/SoldierFiltered'>
+			<label for='ArmyNumber'>ArmyNumber:</label><br>
+			<input type='text' id='ArmyNumber' name='ArmyNumber' value=''><br>
+			<br>
+			<br>
+			<input type='submit' value='Get Assignement'>
+		</form>
+	</body>
+</html>"
+	end
+HTTP.register!(ROUTER, "GET", "/" , home)
+HTTP.register!(ROUTER, "GET", "/SoldierFiltered" , SoldierFiltered)
+HTTP.register!(ROUTER, "GET", "/SoldierFilterInput" , SoldierFilterInput)
+
+
+
+end
+
+end
+server = HTTP.serve!(ROUTER, "127.0.0.1", 80)
+#close(server)
