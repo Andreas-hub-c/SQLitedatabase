@@ -500,7 +500,7 @@ function achtpunteen(req::HTTP.Messages.Request)
           <li><a href=/vijfpuntdrie>5.3 Table</a></li>
           <li><a href=/vijfpuntvier>5.4 Table</a></li>
           <li><a href=/vijfpuntvijf>5.5 Table</a></li>
-          <li><a href=/vijfpuntvijf>5.5 Table</a></li>
+          
 	 	  <li><a href=/>Homepagina</a></li>
         </ul>
       </body>
@@ -887,9 +887,11 @@ function achtpuntdrie(req::HTTP.Messages.Request)
 			<body>
 			<h1> Data picker soldiers </h1>
 			<p>Bekijk de soldier dosis tussen twee datums </p>
-			<a href='/DosiMeterReadingFilterInput'>Filtered Request from a date to a date</a>
+			<a href='/DosiMeterReadingFilterInput'>Filtered Request from a date to a date</a><br>
+			<a href=/>Homepagina</a><br>
 			</body>
-        	<a href=/>Homepagina</a><br>
+
+        	
 		</html>"
 	end
 
