@@ -90,7 +90,7 @@ function driepunteenpunteen(req::HTTP.Messages.Request)
 			</body>
 		</html>"
 	end
-
+function driepunteenpunttwee(req::HTTP.Messages.Request)
 	"<html>
 			<head>
 			<title> Tweede pagina </title>
