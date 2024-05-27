@@ -508,7 +508,7 @@ function achtpunteen(req::HTTP.Messages.Request)
   end
 
  function soldier(req::HTTP.Messages.Request)
-    soldierTable = htmlTable("soldier")
+    
     "<html>
       <head>
         <style>
@@ -523,7 +523,7 @@ function achtpunteen(req::HTTP.Messages.Request)
         <p> Data from the Soldier table </p>
 		<a href='/achtpunteen'>Terug naar 8.1</a><br>
         <a href=/>Homepagina</a><br>
-        $(soldierTable)
+        $(htmlTableForQuery("SELECT * FROM soldierTable")
       </body>
     </html>"
   end
