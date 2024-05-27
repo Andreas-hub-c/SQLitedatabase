@@ -1,0 +1,1019 @@
+begin
+	using Pkg
+	const deps = [pair.second for pair in Pkg.dependencies()]
+	const direct_deps = filter(p -> p.is_direct_dep, deps)
+	const pkgs = [x.name for x in direct_deps]
+	if "HtmlTables" ∉ pkgs
+	    @info "Installing HtmlTables for Julia $(VERSION)..."
+	    Pkg.add(url="https://github.com/vanderpp/HtmlTables.jl/")
+	end
+	if "HTTP" ∉ pkgs
+	    @info "Installing HTTP for Julia $(VERSION)..."
+	    Pkg.add("HTTP")
+	end
+	
+end
+
+using HtmlTables, HTTP
+
+begin
+	const ROUTER = HTTP.Router()
+
+	function home(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>Volledige website door Mille, Wellens, Maelfeyt, Vandersmissen, Pelgrims en Ulrichts</title>
+			</head>
+			<body>
+			<h1>Volledige website door Mille, Wellens, Maelfeyt, Vandersmissen, Pelgrims en Ulrichts</h1>
+			<ul>
+			<p>Hier zijn alle puntjes mooi samengevat</p>
+			<li><a href='/driepunteen'>3.1</a></li>
+			<li><a href='/driepunttwee'>3.2</a></li>
+			<li><a href='/driepuntdrie'>3.3</a></li>
+			<li><a href='/driepuntvier'>3.4</a></li>
+			<li><a href='/zespunteen'>6.1</a></li>
+			<li><a href='/zespunttwee'>6.2</a></li>
+			<li><a href='/achtpunteen'>8.1</a></li>
+			<li><a href='/achtpunttwee'>8.2</a></li>
+			<li><a href='/achtpuntdrie'>8.3</a></li>
+			</ul>
+			</body>
+		</html>"
+	end
+
+function driepunteen(req::HTTP.Messages.Request)
+	"<html>
+		<head>
+		<title> Statische webpagina 3.1 </title>
+		</head>
+	
+		<body>
+		<h1> Statische webpagina 3.1 </h1>
+		
+	
+		<a href=/driepunteenpunteen>Bezoek 3.1.1 </a>
+		<br>
+		<br>
+		<a href=/driepunteenpunttwee>Bezoek 3.1.2 </a>
+		<br>
+		<br>
+		<a href=/>Homepagina</a>
+		
+	
+		</body>
+	 </html>"
+	end
+
+function driepunteenpunteen(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+			<title> Eerste pagina </title>
+			</head>
+
+			<body>
+			<h1> Eerste pagina </h1>
+			<p> 3.1.1 </p> 
+
+			<a href='/driepunteen'>Terug naar 3.1</a>
+			<br>
+			<br>
+			<a href=/>Homepagina</a>
+		
+			</body>
+		</html>"
+	end
+
+function driepunteenpunttwee(req::HTTP.Messages.Request)
+	"<html>
+			<head>
+			<title> Tweede pagina </title>
+			</head>
+
+			<body>
+			<h1> Welkom op de tweede pagina </h1>
+			<p> 3.1.2 </p>
+		
+			<a href='/driepunteen'>Terug naar 3.1</a>
+			<br>
+			<br>
+			<a href=/>Homepagina</a>
+		
+			</body>
+		</html>"
+	end
+
+function driepunttwee(req::HTTP.Messages.Request)
+"<html>
+		<head>
+		<title> Statische webpagina 3.2 </title>
+		</head>
+	
+		<body>
+		<h1>Statische webpagina 3.2</h1>
+		
+	
+		<a href=/driepunttweepunteen> Bezoek 3.2.1 </a>
+		<br>
+		<br>
+		<a href=/driepunttweepunttwee> Bezoek 3.2.2 </a>
+		<br>
+		<br>
+		<a href=/driepunttweepuntdrie> Bezoek 3.2.3 (datatabel)</a>
+		<br>
+		<br>
+		<a href=/>Homepagina</a>
+		
+	
+		</body>
+	 </html>"
+	end
+
+function driepunttweepunteen(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+			<title> Eerste pagina </title>
+			</head>
+
+			<body>
+		
+			<h1> Welkom op 3.2.1 </h1>
+			<p> 3.2.1 </p> 
+			<a href='/driepunttwee'>Terug naar 3.2</a>
+			<br>
+			<br>
+			<a href=/>Homepagina</a>
+		
+			</body>
+		</html>"
+	end
+
+function driepunttweepunttwee(req::HTTP.Messages.Request)
+		"<html>
+			<head>
+			<title> Tweede pagina </title>
+			</head>
+
+			<body>
+			<h1> Welkom op 3.2.2 </h1>
+			<p> Tweede pagina </p>
+		
+			<a href='/driepunttwee'>Terug naar 3.2</a>
+			<br>
+			<br>
+			<a href=/>Homepagina</a>
+			</body>
+		</html>"
+	end
+
+function driepunttweepuntdrie(req::HTTP.Messages.Request)
+	"<html>
+			<head>
+				<title> Derde pagina </title>
+
+			<style>
+				table, td, th{
+				border:1px solid black;
+				}
+			</style>
+			</head>
+
+			<body>
+				<h1> Welkom op 3.2.3 </h1>
+				<p> Derde pagina </p>
+				<a href='/driepunttwee'>Terug naar 3.2</a>
+				<br>
+				<br>
+				<a href=/>Homepagina</a>	
+				<br>
+				<br>
+			<table>
+				<tr><th>title1</th><th>title2</th><th>title3</th><th>title4</th></tr>
+				<tr><td>data11</td><td>data21</td><td>data31</td><td>data41</td></tr>
+				<tr><td>data12</td><td>data22</td><td>data32</td><td>data42</td></tr>
+				<tr><td>data13</td><td>data23</td><td>data33</td><td>data43</td></tr>
+				<tr><td>data14</td><td>data24</td><td>data34</td><td>data44</td></tr>
+			</table>
+			</body>
+		</html>"
+		
+	end
+
+
+function driepuntdrie(req::HTTP.Messages.Request)
+	ENV["htmltables_dbpath"]=raw"C:\Users\mille.b\Documents\juliaSC622\weaponshop2324_SOURCE.db"
+"<html>
+		<head>
+		<style>
+				table, th, td {
+					border: 1px solid black;
+				}
+				</style>
+		<title> Statische webpagina 3.3 </title>
+		</head>
+	
+		<body>
+		<h1>Statische webpagina 3.3</h1>
+
+			
+			<a href=/>Homepagina</a>
+			<br>
+			<br>
+			$(htmlTable("soldier"))
+			
+			
+			</body>
+		</html>"
+		
+	end
+
+function driepuntvier(req::HTTP.Messages.Request)
+	ENV["htmltables_dbpath"]=raw"C:\Users\mille.b\Documents\juliaSC622\weaponshop2324_SOURCE.db"
+"<html>
+		<head>
+		<title> Statische webpagina 3.4 </title>
+		<style>
+				table, th, td {
+					border: 1px solid black;
+				}
+				</style>
+		</head>
+	
+		<body>
+		<h1>Statische webpagina 3.4</h1>
+		
+			<a href=/>Homepagina</a>
+			<br>
+			<br>
+			$(htmlTableForQuery("SELECT * FROM Soldier"))
+		</body>
+	 </html>"
+	end
+
+function zespunteen(req::HTTP.Messages.Request)
+	ENV["htmltables_dbpath"]=raw"C:\Users\mille.b\Documents\juliaSC622\4.2_Volledige_Database.db"
+	"<html>
+      <head>
+        <title> 6.1 </title>
+      </head>
+      <body>
+        <h1>Dynamic Web Application 6.1</h1>
+        
+        <ul>
+          <li><a href=/soldier6>Soldier Table</a></li>
+          <li><a href=/extsoldier6>Extsoldier Table</a></li>
+          <li><a href=/dosimeter6>Dosimeter Table</a></li>
+          <li><a href=/dosimeterassignement6>Dosimeter Assignment Table</a></li>
+          <li><a href=/dosimeterreading6>Dosimeter Reading Table</a></li>
+          <li><a href=/soldier_phones6>Soldier Phones Table</a></li>
+		  <li><a href=/>Homepagina</a></li>
+        </ul>
+      </body>
+    </html>"
+  end
+
+function soldier6(req::HTTP.Messages.Request)
+    soldierTable = htmlTable("soldier")
+    "<html>
+      <head>
+        <style>
+          table, th, td {
+            border: 1px solid black;
+          }
+        </style>
+        <title> Soldier Table </title>
+      </head>
+      <body>
+        <h1> Soldier Table </h1>
+        <p> Data van de Soldier table </p>
+        <a href=/>Homepagina</a><br>
+		<a href='/zespunteen'>Terug naar 6.1</a><br>
+        $(soldierTable)
+      </body>
+    </html>"
+  end
+
+function extsoldier6(req::HTTP.Messages.Request)
+    extsoldierTable = htmlTable("extsoldier")
+    "<html>
+      <head>
+        <style>
+          table, th, td {
+            border: 1px solid black;
+          }
+        </style>
+        <title> Extsoldier Table </title>
+      </head>
+      <body>
+        <h1> Extsoldier Table </h1>
+        <p> Data van de Extsoldier table </p>
+        <a href=/>Homepagina</a><br>
+		<a href='/zespunteen'>Terug naar 6.1</a><br>
+        $(extsoldierTable)
+      </body>
+    </html>"
+  end
+
+ function dosimeter6(req::HTTP.Messages.Request)
+    dosimeterTable = htmlTable("dosimeter")
+    "<html>
+      <head>
+        <style>
+          table, th, td {
+            border: 1px solid black;
+          }
+        </style>
+        <title> Dosimeter Table </title>
+      </head>
+      <body>
+        <h1> Dosimeter Table </h1>
+        <p> Data van de Dosimeter table </p>
+        <a href=/>Homepagina</a><br>
+		<a href='/zespunteen'>Terug naar 6.1</a><br>
+        $(dosimeterTable)
+      </body>
+    </html>"
+  end
+
+function dosimeterassignement6(req::HTTP.Messages.Request)
+    dosimeterassignementTable = htmlTable("dosiMeterAssignement")
+    "<html>
+        <head>
+          <style>
+            table, th, td {
+              border: 1px solid black;
+            }
+          </style>
+          <title> Dosimeter Assignement Table </title>
+        </head>
+        <body>
+          <h1> Dosimeter Assignment Table </h1>
+          <p> Data van Dosimeter Assignement table </p>
+          <a href=/>Homepagina</a><br>
+		  <a href='/zespunteen'>Terug naar 6.1</a><br>
+          $(dosimeterassignementTable)
+        </body>
+      </html>"
+  end
+
+function dosimeterreading6(req::HTTP.Messages.Request)
+  dosimeterreadingTable = htmlTable("dosimeterreading")
+  "<html>
+    <head>
+      <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+      </style>
+      <title> Dosimeter Reading Table </title>
+    </head>
+    <body>
+      <h1> Dosimeter Reading Table </h1>
+      <p> Data van de Dosimeter Reading table </p>
+      <a href=/>Homepagina</a><br>
+  	  <a href='/zespunteen'>Terug naar 6.1</a><br>
+      $(dosimeterreadingTable)
+    </body>
+  </html>"
+end
+
+function soldier_phones6(req::HTTP.Messages.Request)
+  soldierphonesTable = htmlTable("Soldier_Phone")
+  "<html>
+    <head>
+      <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+      </style>
+      <title> Soldier Phones Table </title>
+    </head>
+    <body>
+      <h1> Soldier Phones Table </h1>
+      <p> Data van de Soldier Phones table </p>
+      <a href=/>Homepagina</a><br>
+  	  <a href='/zespunteen'>Terug naar 6.1</a><br>
+      $(soldierphonesTable)
+    </body>
+  </html>"
+end
+
+function zespunttwee(req::HTTP.Messages.Request)
+	ENV["htmltables_dbpath"]=raw"C:\Users\mille.b\Documents\juliaSC622\4.2_Volledige_Database.db"
+	"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>6.2 home</title>
+			</head>
+			<body>
+			<h1> Soldier filtered input </h1>
+			<p>Bekijk de attributes van een specifieke soldier</p>
+			<a href='/SoldierFilterInput'>Filtered Request van een Armynr</a><br>
+			<a href=/>Homepagina</a><br>
+			</body>
+		</html>"
+	end
+
+function SoldierFiltered(req::HTTP.Messages.Request)
+		@info "dosimeterAssignementFiltered Called"
+
+    	targetURI = HTTP.URI(req.target)
+    	queryParameters = HTTP.queryparams(targetURI)
+    
+    	requestedArmynr = parse(Int64,queryParameters["ArmyNumber"])
+		
+		sqlQry = "SELECT
+					s.ArmyNumber,
+					s.firstName,
+					s.surName,
+					s.dateOfBirth,
+					s.grou,
+					s.nationality,
+					s.language,
+					s.street,
+					s.nr,
+					s.city,
+					s.postalCode,
+					s.Country,
+					sp.phones
+					
+				FROM
+					Soldier s
+						INNER JOIN Soldier_Phone sp ON s.ArmyNumber = sp.ArmyNumber
+				WHERE s.ArmyNumber = $requestedArmynr
+				;"
+		"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>Soldier information</title>
+			</head>
+			<body>
+			<a href='/zespunttwee'>Terug naar 6.2</a><br>
+			<a href=/>Homepagina</a><br>
+			$(htmlTableForQuery(sqlQry))
+			</body>
+		</html>"
+	end
+
+function SoldierFilterInput(req::HTTP.Messages.Request)
+"<html>
+	<head>
+		<title>Soldier Filter Input</title>
+	</head>
+	<body>
+		<h1>On this page you can ask the attributes for a specific soldier.</h1>
+		<form action='/SoldierFiltered'>
+			<label for='ArmyNumber'>ArmyNumber:</label><br>
+			<input type='text' id='ArmyNumber' name='ArmyNumber' value=''><br>
+			<br>
+			<br>
+			<input type='submit' value='Get Assignment'>
+		</form>
+	</body>
+</html>"
+	end
+
+function achtpunteen(req::HTTP.Messages.Request)
+	ENV["htmltables_dbpath"]=raw"C:\Users\mille.b\Documents\juliaSC622\4.2_Volledige_Database.db"
+	 "<html>
+      <head>
+        <title> 8.1 </title>
+      </head>
+      <body>
+        <h1>Dynamic Web Application 8.1</h1>
+        <ul>
+          <li><a href=/soldier>Soldier Table</a></li>
+          <li><a href=/extsoldier>Extsoldier Table</a></li>
+          <li><a href=/dosimeter>Dosimeter Table</a></li>
+          <li><a href=/dosiMeterAssignement>Dosimeter Assignement Table</a></li>
+          <li><a href=/dosimeterreading>Dosimeter Reading Table</a></li>
+          <li><a href=/soldier_Phone>Soldier Phones Table</a></li>
+          <li><a href=/vijfpunteen>5.1 Table</a></li>
+          <li><a href=/vijfpunttwee>5.2 Table</a></li>
+          <li><a href=/vijfpuntdrie>5.3 Table</a></li>
+          <li><a href=/vijfpuntvier>5.4 Table</a></li>
+          <li><a href=/vijfpuntvijf>5.5 Table</a></li>
+          
+	 	  <li><a href=/>Homepagina</a></li>
+        </ul>
+      </body>
+    </html>"
+  end
+
+function soldier(req::HTTP.Messages.Request)
+    
+    "<html>
+      <head>
+        <style>
+          table, th, td {
+            border: 1px solid black;
+          }
+        </style>
+        <title> Soldier Table </title>
+      </head>
+      <body>
+        <h1> Soldier Table </h1>
+        <p> Data from the Soldier table </p>
+		<a href='/achtpunteen'>Terug naar 8.1</a><br>
+        <a href=/>Homepagina</a><br>
+        $(htmlTableForQuery("SELECT * FROM Soldier"))
+      </body>
+    </html>"
+  end
+
+function extsoldier(req::HTTP.Messages.Request)
+    
+    "<html>
+      <head>
+        <style>
+          table, th, td {
+            border: 1px solid black;
+          }
+        </style>
+        <title> Extsoldier Table </title>
+      </head>
+      <body>
+        <h1> Extsoldier Table </h1>
+        <p> Data from the Extsoldier table </p>
+        <a href='/achtpunteen'>Terug naar 8.1</a><br>
+        <a href=/>Homepagina</a><br>
+        $(htmlTableForQuery("SELECT * FROM extsoldier"))
+      </body>
+    </html>"
+  end
+
+function dosimeter(req::HTTP.Messages.Request)
+    
+    "<html>
+      <head>
+        <style>
+          table, th, td {
+            border: 1px solid black;
+          }
+        </style>
+        <title> Dosimeter Table </title>
+      </head>
+      <body>
+        <h1> Dosimeter Table </h1>
+        <p> Data from the Dosimeter table </p>
+        <a href='/achtpunteen'>Terug naar 8.1</a><br>
+        <a href=/>Homepagina</a><br>
+        $(htmlTableForQuery("SELECT * FROM dosimeter"))
+      </body>
+    </html>"
+  end
+
+function dosiMeterAssignement(req::HTTP.Messages.Request)
+    
+    "<html>
+        <head>
+          <style>
+            table, th, td {
+              border: 1px solid black;
+            }
+          </style>
+          <title> Dosimeter Assignment Table </title>
+        </head>
+        <body>
+          <h1> Dosimeter Assignment Table </h1>
+          <p> Data from the Dosimeter Assignment table </p>
+          <a href='/achtpunteen'>Terug naar 8.1</a><br>
+          <a href=/>Homepagina</a><br>
+          $(htmlTableForQuery("SELECT * FROM dosiMeterAssignement"))
+        </body>
+      </html>"
+  end
+
+function dosimeterreading(req::HTTP.Messages.Request)
+  
+  "<html>
+    <head>
+      <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+      </style>
+      <title> Dosimeter Reading Table </title>
+    </head>
+    <body>
+      <h1> Dosimeter Reading Table </h1>
+      <p> Data from the Dosimeter Reading table </p>
+      <a href='/achtpunteen'>Terug naar 8.1</a><br>
+      <a href=/>Homepagina</a><br>
+      $(htmlTableForQuery("SELECT * FROM dosimeterreading"))
+    </body>
+  </html>"
+end
+
+function soldier_Phone(req::HTTP.Messages.Request)
+
+  "<html>
+    <head>
+      <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+      </style>
+      <title> Soldier Phones Table </title>
+    </head>
+    <body>
+      <h1> Soldier Phones Table </h1>
+      <p> Data from the Soldier Phones table </p>
+      <a href='/achtpunteen'>Terug naar 8.1</a><br>
+      <a href=/>Homepagina</a><br>
+      $(htmlTableForQuery("SELECT * FROM soldier_Phone"))
+    </body>
+  </html>"
+end
+
+function vijfpunteen(req::HTTP.Messages.Request)
+  @info "vijfpuntéén"
+  sqlQry = "SELECT 
+  firstName, 
+  surname, 
+  nationality, 
+  language
+  FROM Soldier;
+  "
+  "
+    <html>
+    	<head>
+	    	<style>
+	    		table, th, td {
+		    		border: 1px solid black;
+		    	}
+		    </style>
+		    <title>Dit is de DosimeterAssignment</title>
+    	</head>
+    	<body>
+  		<a href='/achtpunteen'>Terug naar 8.1</a><br>
+        <a href=/>Homepagina</a><br>
+      	$(htmlTableForQuery(sqlQry))
+  		
+    	</body>
+    </html>
+"
+end
+
+function vijfpunttwee(req::HTTP.Messages.Request)
+  @info "vijfpunttwee"
+  sqlQry = "SELECT 
+  firstName, 
+  surName, 
+  phones
+  FROM Soldier, Soldier_Phone
+  "
+  "
+    <html>
+    	<head>
+	    	<style>
+	    		table, th, td {
+		    		border: 1px solid black;
+		    	}
+		    </style>
+		    <title>Dit is de DosimeterAssigement</title>
+    	</head>
+    	<body>
+  		<a href='/achtpunteen'>Terug naar 8.1</a><br>
+        <a href=/>Homepagina</a><br>
+      	$(htmlTableForQuery(sqlQry))
+    	</body>
+    </html>
+"
+end
+
+function vijfpuntdrie(req::HTTP.Messages.Request)
+  @info "vijfpuntdrie"
+  sqlQry = "SELECT firstName, 
+  surname, 
+  nationality, 
+  language
+  FROM Soldier
+  WHERE ArmyNumber = 1963253;
+  "
+  "
+    <html>
+    	<head>
+	    	<style>
+	    		table, th, td {
+		    		border: 1px solid black;
+		    	}
+		    </style>
+		    <title>Dit is de DosimeterAssignement</title>
+    	</head>
+    	<body>
+  		<a href='/achtpunteen'>Terug naar 8.1</a><br>
+        <a href=/>Homepagina</a><br>
+      	$(htmlTableForQuery(sqlQry))
+    	</body>
+    </html>
+"
+end
+
+function vijfpuntvier(req::HTTP.Messages.Request)
+  @info "vijfpuntvier"
+  sqlQry = "SELECT
+  Soldier.ArmyNumber,
+  Soldier.firstName,
+  Soldier.surName,
+  dosiMeterAssignement.SerialNumber,
+  dosimeter.Type
+  FROM Soldier
+  JOIN dosiMeterAssignement ON Soldier.ArmyNumber = dosiMeterAssignement.ArmyNumber
+  JOIN dosiMeter ON dosiMeterAssignement.SerialNumber = dosiMeter.SerialNumber;
+  "
+  "
+    <html>
+    	<head>
+	    	<style>
+	    		table, th, td {
+		    		border: 1px solid black;
+		    	}
+		    </style>
+		    <title>Dit is de DosimeterAssignment</title>
+    	</head>
+    	<body>
+  		<a href='/achtpunteen'>Terug naar 8.1</a><br>
+        <a href=/>Homepagina</a><br>
+      	$(htmlTableForQuery(sqlQry))
+    	</body>
+    </html>
+"
+end
+
+
+function vijfpuntvijf(req::HTTP.Messages.Request)
+  @info "vijfpuntvijf"
+  sqlQry = "SELECT s.firstName,
+    s.surName,
+     s.armyNumber,
+          dmr.serialNumber,
+         dmr.dateReadOut,
+         dmr.dateDoseFrom,
+         dmr.dateDoseTo,
+         dmr.dosemv
+            FROM Soldier s, dosiMeterAssignement da, DosiMeterReading dmr
+        WHERE s.armyNumber = da.armyNumber
+        AND da.serialNumber = dmr.serialNumber
+        AND dmr.dateDoseFrom = '2024-04-01';
+  "
+  "
+    <html>
+    	<head>
+	    	<style>
+	    		table, th, td {
+		    		border: 1px solid black;
+		    	}
+		    </style>
+		    <title>Dit is de DosimeterAssignment</title>
+    	</head>
+    	<body>
+  		<a href='/achtpunteen'>Terug naar 8.1</a><br>
+        <a href=/>Homepagina</a><br>
+      	$(htmlTableForQuery(sqlQry))
+    	</body>
+    </html>
+"
+end
+
+function vijfpuntzes(req::HTTP.Messages.Request)
+  @info "vijfpuntzes"
+  sqlQry = "SELECT s.firstName,
+  s.surName,
+  s.armyNumber,
+  SUM(dmr.dosemv) AS jaarlijksStraling
+FROM Soldier s, dosiMeterAssignement da, DosiMeterReading dmr
+WHERE s.armyNumber = da.armyNumber
+AND da.serialNumber = dmr.serialNumber
+AND dmr.serialNumber = '1000' 
+AND dmr.dateDoseFrom BETWEEN '2024-01-01' AND '2024-12-31'
+GROUP BY s.firstName, s.surName, s.armyNumber;
+  "
+  "
+    <html>
+    	<head>
+	    	<style>
+	    		table, th, td {
+		    		border: 1px solid black;
+		    	}
+		    </style>
+		    <title>Dit is de DosiMeterAssignment</title>
+    	</head>
+    	<body>
+  		<a href='/achtpunteen'>Terug naar 8.1</a><br>
+        <a href=/>Homepagina</a><br>
+      	$(htmlTableForQuery(sqlQry))
+    	</body>
+    </html>
+"
+end
+
+function achtpunttwee(req::HTTP.Messages.Request)
+	ENV["htmltables_dbpath"]=raw"C:\Users\mille.b\Documents\juliaSC622\4.2_Volledige_Database.db"
+	 "<html>
+		<head>
+		<title> Dynamic webpage 8.2 </title>
+		</head>
+	
+		<body>
+		<h1>Dynamic webpage 8.2 </h1>
+	
+	 <h2>Op deze pagina kan je een militair opvragen via zijn ArmyNumber.</h2>
+        <a href=/>Homepagina</a><br>
+  				<form action='/SoldierInfoFiltered'>
+  					<label for='ArmyNumber'>ArmyNumber:</label><br>
+  					<input type='text' id='ArmyNumber' name='ArmyNumber' value=''>                        <br>
+  					<br>
+  					<br>
+  					<input type='submit' value='Get Data'>
+  				</form>     	
+	
+		
+		</body>
+	 </html>"
+	end
+
+function SoldierInfoFiltered(req::HTTP.Messages.Request)
+
+		targetURI = HTTP.URI(req.target)
+		queryParameters = HTTP.queryparams(targetURI)
+
+		requestedArmyNumber = parse(Int64, queryParameters["ArmyNumber"])
+
+		sqlQry = "SELECT
+					
+					s.firstName,
+					s.surName,
+					s.nationality,
+					s.language
+
+
+				FROM
+					Soldier s					
+				WHERE s.ArmyNumber = $requestedArmyNumber;"
+		
+		"<html>
+			<head>
+			<style>
+				table, th, td {
+					border: 1px solid black;
+				}
+			</style>
+			<title>Soldier5.3Info</title>
+		</head>
+		<body>
+		<a href='/achtpunttwee'>Terug naar 8.2</a><br>
+        <a href=/>Homepagina</a><br>
+		$(htmlTableForQuery(sqlQry))
+		</body>
+	</html>"
+	end 
+
+function achtpuntdrie(req::HTTP.Messages.Request)
+	ENV["htmltables_dbpath"]=raw"C:\Users\mille.b\Documents\juliaSC622\4.2_Volledige_Database.db"
+"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>8.3 home</title>
+			</head>
+			<body>
+			<h1> Data picker soldiers </h1>
+			<p>Bekijk de soldier dosis tussen twee datums </p>
+			<a href='/DosiMeterReadingFilterInput'>Filtered Request from a date to a date</a><br>
+			<a href=/>Homepagina</a><br>
+			</body>
+
+        	
+		</html>"
+	end
+
+function DosiMeterReadingFiltered(req::HTTP.Messages.Request)
+		@info "DosiMeterReadingFiltered Called"
+
+    	targetURI = HTTP.URI(req.target)
+    	queryParameters = HTTP.queryparams(targetURI)
+    
+    RequesteddateDoseFrom = queryParameters["dateDoseFrom"]
+	RequesteddateDoseTo = queryParameters["dateDoseTo"]
+		
+		sqlQry = "SELECT 
+						s.firstName,
+       					s.surName,
+       					s.ArmyNumber,
+       					dmr.SerialNumber,
+       					dmr.dateReadOut,
+       					dmr.dateDoseFrom,
+       					dmr.dateDoseTo,
+       					dmr.dosemv
+		
+				FROM 
+					Soldier s
+						INNER JOIN dosiMeterAssignement da ON s.ArmyNumber = da.ArmyNumber
+						INNER JOIN DosiMeterReading dmr ON da.SerialNumber = dmr.SerialNumber
+					Where dateDoseFrom >= '$RequesteddateDoseFrom'
+					AND dateDoseTo <= '$RequesteddateDoseTo'
+  								
+				;"
+		"<html>
+			<head>
+	            <style>
+	                table, th, td {
+	                    border: 1px solid black;
+	                }
+	            </style>
+				<title>DosimeterAssignment</title>
+			</head>
+			<body>
+			<a href='/achtpuntdrie'>Terug naar 8.3</a><br>
+        	<a href=/>Homepagina</a><br>
+			$(htmlTableForQuery(sqlQry))
+			</body>
+		</html>"
+	end
+
+function DosiMeterReadingFilterInput(req::HTTP.Messages.Request)
+"<html>
+	<head>
+		<title>DosiMeterReadingFilter Input</title>
+	</head>
+	<body>
+		<h1>On this page you can ask the dose from all soldiers between a certain period</h1>
+		<a href='/achtpuntdrie'>Terug naar 8.3</a><br>
+        <a href=/>Homepagina</a><br>
+		<form action='/DosiMeterReadingFiltered'>
+			<label for='dateDoseFrom'>dateDoseFrom:</label><br>
+			<input type='date' id='dateDoseFrom' name='dateDoseFrom' value=''><br>
+
+      <label for='dateDoseTo'>dateDoseTo:</label><br>
+			<input type='date' id='dateDoseTo' name='dateDoseTo' value=''>
+			<br>
+			<br>
+			<input type='submit' value='Get Soldiers'>
+		</form>
+	</body>
+</html>"
+	end
+
+HTTP.register!(ROUTER, "GET", "/" , home)
+HTTP.register!(ROUTER, "GET", "/driepunteen", driepunteen)
+HTTP.register!(ROUTER, "GET", "/driepunteenpunttwee", driepunteenpunttwee)
+HTTP.register!(ROUTER, "GET", "/driepunteenpunteen", driepunteenpunteen)
+HTTP.register!(ROUTER, "GET", "/driepunttwee", driepunttwee)
+HTTP.register!(ROUTER,"GET","/driepunttweepuntdrie",driepunttweepuntdrie)
+HTTP.register!(ROUTER, "GET", "/driepunttweepunttwee", driepunttweepunttwee)
+HTTP.register!(ROUTER, "GET", "/driepunttweepunteen", driepunttweepunteen)
+HTTP.register!(ROUTER, "GET", "/driepuntdrie", driepuntdrie)
+HTTP.register!(ROUTER, "GET", "/driepuntvier", driepuntvier)
+HTTP.register!(ROUTER, "GET", "/zespunteen", zespunteen)
+HTTP.register!(ROUTER, "GET", "/soldier6", soldier6)
+HTTP.register!(ROUTER, "GET", "/extsoldier6", extsoldier6)
+HTTP.register!(ROUTER, "GET", "/dosimeter6", dosimeter6)
+HTTP.register!(ROUTER, "GET", "/dosimeterassignement6", dosimeterassignement6)
+HTTP.register!(ROUTER, "GET", "/dosimeterreading6", dosimeterreading6)
+HTTP.register!(ROUTER, "GET", "/soldier_phones6", soldier_phones6)
+HTTP.register!(ROUTER, "GET", "/zespunttwee", zespunttwee)	
+HTTP.register!(ROUTER, "GET", "/SoldierFiltered" , SoldierFiltered)
+HTTP.register!(ROUTER, "GET", "/SoldierFilterInput" , SoldierFilterInput)
+HTTP.register!(ROUTER, "GET", "/achtpunteen", achtpunteen)
+HTTP.register!(ROUTER, "GET", "/soldier", soldier)
+HTTP.register!(ROUTER, "GET", "/extsoldier", extsoldier)
+HTTP.register!(ROUTER, "GET", "/dosimeter", dosimeter)
+HTTP.register!(ROUTER, "GET", "/dosiMeterAssignement", dosiMeterAssignement)
+HTTP.register!(ROUTER, "GET", "/dosimeterreading", dosimeterreading)
+HTTP.register!(ROUTER, "GET", "/soldier_Phone", soldier_Phone)
+HTTP.register!(ROUTER, "GET", "/vijfpunteen", vijfpunteen)
+HTTP.register!(ROUTER, "GET", "/vijfpunttwee", vijfpunttwee)
+HTTP.register!(ROUTER, "GET", "/vijfpuntdrie", vijfpuntdrie)
+HTTP.register!(ROUTER, "GET", "/vijfpuntvier", vijfpuntvier)
+HTTP.register!(ROUTER, "GET", "/vijfpuntvijf", vijfpuntvijf)
+HTTP.register!(ROUTER, "GET", "/vijfpuntzes", vijfpuntzes)
+HTTP.register!(ROUTER, "GET", "/achtpunttwee", achtpunttwee)
+HTTP.register!(ROUTER, "GET", "/SoldierInfoFiltered", SoldierInfoFiltered)
+HTTP.register!(ROUTER, "GET", "/achtpuntdrie", achtpuntdrie)
+HTTP.register!(ROUTER, "GET", "/DosiMeterReadingFiltered" , DosiMeterReadingFiltered)
+HTTP.register!(ROUTER, "GET", "/DosiMeterReadingFilterInput" , DosiMeterReadingFilterInput)
+
+
+end
+
+
+server = HTTP.serve!(ROUTER, "127.0.0.1", 80)
+
+#close(server)
